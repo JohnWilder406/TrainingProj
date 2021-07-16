@@ -4,7 +4,9 @@ import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col } from  'react-bootstrap';
 
 const ModularForm = (props) => {
-
+    return (
+        <h1>Modular Form Page</h1>
+    )
 }
 
 export default ModularForm;

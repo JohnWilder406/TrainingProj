@@ -4,7 +4,9 @@ import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col } from  'react-bootstrap';
 
 const UserProgress = (props) => {
-
+    return (
+        <h1>User Progress page</h1>
+    )
 }
 
 export default UserProgress;
