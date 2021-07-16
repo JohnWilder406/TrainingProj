@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-require('./routes/user.routes')(app)
+require('./routes/users.routes')(app)
 require('./routes/training.routes')(app)
 
 app.listen(port, ()=> console.log(`Listening on port: ${port}`));

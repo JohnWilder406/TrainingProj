@@ -2,6 +2,17 @@ const bycrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const {conn1} = require('../config/mongoose.config')
 
+const WorkoutSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, "Workout name is required"]
+    },
+    startdate: {
+        type: Date,
+        required: [true, "Starting date is required"]
+    }
+})
+
 const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -26,7 +37,24 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, "Password is required"],
         minLength: [8, "Password must be 8 characters or longer"]
-    }
+    },
+
+    training: {
+        type: String,
+
+    },
+
+    workouts: [WorkoutSchema],
+
+    birthday: {
+        type: Date,
+        required: [true, "Birthday is required"]
+    },
+
+    height: Number,
+    weight: Number
+
+
 }, {timestamps: true});
 
 UserSchema.virtual('confirmPassword')
@@ -48,6 +76,6 @@ UserSchema.pre('save', function(next) {
         });
 });
 
-const User = conn1.model('EmployeeUser', UserSchema)
+const User = conn1.model('User', UserSchema)
 
 module.exports = User;

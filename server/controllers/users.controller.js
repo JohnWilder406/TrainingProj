@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require("../models/user.model");
+const User = require("../models/users.model");
 const jwt = require('jsonwebtoken')
 
 module.exports = {
@@ -60,5 +60,21 @@ module.exports = {
         res.clearCookie("usertoken")
         res.json({message: "You have successfully logged out!"});
     },
+
+    update: (req,res) => {
+        User.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true,
+            context: "query"
+        })
+            .then(updatedUser => res.json(updatedUser))
+            .catch(err => res.json(err))
+    },
+
+    get: (req,res) => {
+        User.findOne({_id: req.params.id})
+            .then(user => res.json(user))
+            .catch(err => res.json(err))
+    }
 
 }
