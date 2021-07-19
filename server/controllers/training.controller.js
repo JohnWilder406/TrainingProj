@@ -1,10 +1,11 @@
 const Training = require("../models/training.model");
 
 module.exports.createTraining = (req,res) => {
-    const {name, duration, workouts} = req.body;
+    const {name, duration, difficulty, workouts} = req.body;
     Training.create({
         name,
         duration,
+        difficulty,
         workouts
     })
         .then(plan=> res.json(plan))

@@ -41,14 +41,16 @@ const UserSchema = new mongoose.Schema({
 
     training: {
         type: String,
+    },
 
+    difficulty: {
+        type: String,
     },
 
     workouts: [WorkoutSchema],
 
     birthday: {
         type: Date,
-        required: [true, "Birthday is required"]
     },
 
     height: Number,
