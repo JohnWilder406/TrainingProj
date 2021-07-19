@@ -61,6 +61,7 @@ module.exports = {
         res.json({message: "You have successfully logged out!"});
     },
 
+    //use this controller to update profile 
     update: (req,res) => {
         User.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
@@ -75,6 +76,29 @@ module.exports = {
         User.findOne({_id: req.params.id})
             .then(user => res.json(user))
             .catch(err => res.json(err))
-    }
+    },
 
+    //use this controller to add workouts to array
+    add: (req, res) => {
+        User.updateOne({'_id': req.params.id},
+        {$push: {
+            workouts: req.body.workout
+        }})
+        .then(updatedWorkout => res.json(updatedWorkout))
+        .catch(err => res.json(err))
+    },
+
+    //use this controller to change number of workouts left
+    complete: (req, res) => {
+        User.updateOne({'workouts._id': req.params.workoutid},
+        {'$set': {
+            'workouts.$.number': req.body.number
+        }})
+        .then(updatedWorkout => res.json(updatedWorkout))
+        .catch(err => res.json(err))
+    },
+
+
+
+    //use this controller to switch complete from false to true (not sure if we need this- i'll build it if needed)
 }

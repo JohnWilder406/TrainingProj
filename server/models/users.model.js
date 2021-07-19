@@ -10,6 +10,12 @@ const WorkoutSchema = new mongoose.Schema({
     startdate: {
         type: Date,
         required: [true, "Starting date is required"]
+    },
+    number: {
+        type: Number
+    },
+    complete: {
+        type: Boolean
     }
 })
 
@@ -54,7 +60,9 @@ const UserSchema = new mongoose.Schema({
     },
 
     height: Number,
-    weight: Number
+    weight: Number,
+
+    admin: Boolean
 
 
 }, {timestamps: true});

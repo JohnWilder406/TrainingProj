@@ -6,4 +6,10 @@ module.exports = (app) => {
     app.post("/api/users/logout", UserController.logout);
     app.put("/api/users/:id", UserController.update);
     app.get("/api/user/get/:id", UserController.get);
+
+    //path for adding workouts to user
+    app.put("/api/users/:id/add", UserController.add);
+
+    //path for completing a workout. this route replaces number left, so please do math on front end from original number and replace, do not subtract.
+    app.put("/api/users/:id/complete", UserController.complete);
 }
