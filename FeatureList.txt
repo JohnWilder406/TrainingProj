@@ -1,0 +1,30 @@
+Features for Training App:
+
+Group Members:
+John Wilder- Backend, Admin Portal
+April Hughes- User Portal
+
+User Portal
+Login/Registration Required (protected path)
+Conditonally renedered backend validations
+API for Motivational Quotes
+Calendar Features
+Database modification ($push and $set for workouts)
+User CRU
+
+
+
+
+Admin Portal
+Login Required (protected path)
+CRUD Operations for Database
+User Progress Page (Stretch)
+Days of Week for Workouts (Stretch)
+Modular Form use for Creation and Editing
+Conditional Rendering for Create and Edit components
+
+Wireframe Link:
+https://balsamiq.cloud/s1z4efj/plc4x3d
+
+Github Repo:
+https://github.com/JohnWilder406/TrainingProj
