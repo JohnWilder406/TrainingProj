@@ -39,3 +39,12 @@ module.exports.deleteTraining = (req,res) => {
         .then(deleteConfirmation => res.json(deleteConfirmation))
         .catch(err => res.json(err))
 }
+
+module.exports.createWorkout= (req, res) => {
+    Training.updateOne({'_id': req.params.id},
+        {$push: {
+            workouts: req.body.workout
+        }})
+        .then(updatedPlan => res.json(updatedPlan))
+        .catch(err => res.json(err))
+}
