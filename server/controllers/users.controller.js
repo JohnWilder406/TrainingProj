@@ -97,7 +97,26 @@ module.exports = {
         .then(updatedWorkout => res.json(updatedWorkout))
         .catch(err => res.json(err))
     },
-
+    
+    //create user controller for testing
+    createUser: (req, res) => {
+        const {firstName, lastName, email, password, training, difficulty, workouts, birthday, height, weight, admin} = req.body;
+        User.create({
+            firstName,
+            lastName,
+            email,
+            password,
+            training,
+            difficulty,
+            workouts,
+            birthday,
+            height,
+            weight,
+            admin
+        })
+            .then(user => res.json(user))
+            .catch(err => res.json(err))
+    }
 
 
     //use this controller to switch complete from false to true (not sure if we need this- i'll build it if needed)
