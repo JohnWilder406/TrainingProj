@@ -31,6 +31,11 @@ const TrainingSchema = new mongoose.Schema({
         required: [true, "Training Plan Name is required"],
     },
 
+    difficulty: {
+        type: String,
+        required: [true, "Difficulty level is required"]
+    },
+
     duration: {
         type: Number,
         required: [true, "Plan must have a duration"]
