@@ -1,12 +1,11 @@
 const Training = require("../models/training.model");
 
 module.exports.createTraining = (req,res) => {
-    const {name, duration, difficulty, workouts} = req.body;
+    const {name, duration, difficulty} = req.body;
     Training.create({
         name,
-        duration,
         difficulty,
-        workouts
+        duration
     })
         .then(plan=> res.json(plan))
         .catch(err => res.json(err))
