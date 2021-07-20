@@ -39,7 +39,7 @@ function App() {
         }
       </Router>
       <Router>
-        <AdminLogin path="/admin" setAdmin={true} />
+        <AdminLogin path="/admin" setAdmin={setAdmin} />
         {
           admin ? (
             <>

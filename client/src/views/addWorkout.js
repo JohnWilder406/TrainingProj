@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col } from  'react-bootstrap';
+import { Container, Card, Form, Row, Col, Navbar, Nav, Button } from  'react-bootstrap';
 import WorkoutForm from '../components/workoutform';
 
 const AddWorkout = (props) => {
@@ -35,6 +35,12 @@ const AddWorkout = (props) => {
     return (
         <Container>
             <h1>Add Workout Plan Page (admin)</h1>
+            <Navbar bg="dark" variant="dark">
+                <Navbar.Brand>Crusher Training App</Navbar.Brand>
+                <Nav className="mr-auto">
+                    <Button variant="outline-dark"><Link to="/admin/main">Main Page</Link></Button>
+                </Nav>
+            </Navbar>
             <WorkoutForm object={workout} setObject={setWorkout} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Workout"}/>
         </Container>
     )
