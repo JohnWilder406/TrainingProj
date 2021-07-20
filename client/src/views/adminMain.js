@@ -58,7 +58,7 @@ const AdminMain = (props) => {
                             {
                                 plans.map((plan, idx) => {
                                     return (
-                                        <tr key={idx}><td>{plan.name}</td><td>{plan.difficulty}</td><td>{plan.workouts.length}</td><td><Button variant="none"><Link to="">Edit Plan</Link></Button><Button variant="none"><Link to="">Add Workout</Link></Button></td></tr>
+                                        <tr key={idx}><td>{plan.name}</td><td>{plan.difficulty}</td><td>{plan.workouts.length}</td><td><Button variant="none"><Link to={"/admin/" + plan._id + "/editplan"}>Edit Plan</Link></Button><Button variant="none"><Link to="">Add Workout</Link></Button></td></tr>
                                     )
                                 })
                             }

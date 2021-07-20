@@ -23,6 +23,12 @@ module.exports.getTraining = (req,res) => {
         .catch(err => res.json(err))
 }
 
+// module.exports.getWorkout = (req, res) => {
+//     Training.findById(req.params.id)
+//         .then(workout => res.json(workout))
+//         .catch(err => res.json(err))
+// }
+
 module.exports.updateTraining= (req, res) => {
     Training.findByIdAndUpdate(req.params.id, req.body, {
         new:true,
@@ -45,5 +51,14 @@ module.exports.createWorkout= (req, res) => {
             workouts: req.body.workout
         }})
         .then(updatedPlan => res.json(updatedPlan))
+        .catch(err => res.json(err))
+}
+
+module.exports.updateWorkout = (req, res) => {
+    Training.updateOne({'workouts._id': req.params.id},
+        {'$set': {
+            workouts: req.body.workout
+        }})
+        .then(updatedWorkout => res.json(updatedWorkout))
         .catch(err => res.json(err))
 }
