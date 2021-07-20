@@ -20,7 +20,8 @@ const AddTraining = (props) => {
                 if(res.data.errors) {
                     setErrors(res.data.errors)
                 } else {
-                    navigate('/admin/main')
+
+                    navigate('/admin/training/' + res.data._id + '/addworkout')
                 }
             })
             .catch((err) => {

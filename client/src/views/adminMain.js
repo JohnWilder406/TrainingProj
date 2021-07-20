@@ -38,7 +38,7 @@ const AdminMain = (props) => {
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand>Crusher Training App</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Button variant="outline-dark"><Link to="">New Training Plan</Link></Button>
+                    <Button variant="outline-dark"><Link to="/admin/addplan">New Training Plan</Link></Button>
                     <Button variant="outline-dark"><Link to="">User Progress</Link></Button>
                 </Nav>
                 <Search searchQuery={searchQuery} onChange={updateInput} />
@@ -58,7 +58,7 @@ const AdminMain = (props) => {
                             {
                                 plans.map((plan, idx) => {
                                     return (
-                                        <tr key={idx}><td>{plan.name}</td><td>{plan.difficulty}</td><td>{plan.workouts.length}</td><td><Button variant="none"><Link to="">Edit Plan</Link></Button><Button variant="none"><Link to="">Add Workout</Link></Button></td></tr>
+                                        <tr key={idx}><td>{plan.name}</td><td>{plan.difficulty}</td><td>{plan.workouts.length}</td><td><Button variant="none"><Link to={"/admin/" + plan._id + "/editplan"}>Edit Plan</Link></Button><Button variant="none"><Link to="">Add Workout</Link></Button></td></tr>
                                     )
                                 })
                             }

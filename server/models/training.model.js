@@ -5,9 +5,6 @@ const uniqueValidator = require('mongoose-unique-validator');
 const WorkoutSchema = new mongoose.Schema({
     name: {
         type: String,
-        unique: true,
-        uniqueCaseInsensitive: true,
-        required: [true, "Workout name is required"]
     },
     duration: {
         type: Number,
@@ -45,7 +42,7 @@ const TrainingSchema = new mongoose.Schema({
 
 }, {timestamps: true});
 
-TrainingSchema.plugin(uniqueValidator, {message: 'Error: product name must be unique'})
+TrainingSchema.plugin(uniqueValidator, {message: 'Error: plan name must be unique'})
 
 const trainingModel = conn2.model('Training', TrainingSchema);
 
