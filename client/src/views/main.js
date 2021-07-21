@@ -37,9 +37,10 @@ const Main = (props) => {
 
     return (
         <div>
+            <h1>User Main Page</h1>
             <Navbar />
             <div class="container">
-                <h5>{date}</h5>
+                <h5 align="center">{date}</h5>
                 <blockquote class="blockquote">
                     <p>{quote}</p>
                 </blockquote>
