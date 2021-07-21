@@ -6,21 +6,28 @@ import Calendar from 'react-calendar';
 import Navbar from '../components/Navbar';
 import {LoginContext} from '../context/context';
 
+//random number generator for api call for quote 
+function randomNum() {
+    let num = Math.floor(Math.random()*1644)
+
+    return num
+}
+
 const Main = (props) => {
     const {id} = useContext(LoginContext);
     var date = new Date().toDateString();
-
     const [user, setUser] = useState();
     const [quote, setQuote] = useState("");
 
     console.log(id)
 
-    //Going to work on this tomorrow. Running into an error. 'https://zenquotes.io/api/today' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
     useEffect(() => {
-        axios.get('https://zenquotes.io/api/random')
+        let idx = randomNum();
+        axios.get('https://type.fit/api/quotes')
             .then((res) =>{
-                console.log(res);
-                setQuote(res.data);
+                console.log(res.data);
+                setQuote(res.data[idx].text);
             })
             .catch((err) => {
                 console.log(err);
