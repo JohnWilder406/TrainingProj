@@ -15,6 +15,7 @@ import Main from './views/main';
 import Profile from './views/profile';
 import UserProgress from './views/userProgress';
 import {Redirect, Router} from '@reach/router'
+import Wrapper from './components/wrapper';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <div className="App">
+    <Wrapper>
       <Router>
         <Login path="/" setToken={true} />
         <Register path="/register" />
@@ -37,7 +39,9 @@ function App() {
           <Redirect from="/main" to="/" noThrow/>
         )
         }
+
       </Router>
+    </Wrapper>
       <Router>
         <AdminLogin path="/admin" setAdmin={setAdmin} />
         {
