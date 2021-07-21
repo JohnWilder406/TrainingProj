@@ -6,6 +6,7 @@ module.exports = (app) => {
     app.post("/api/users/logout", UserController.logout);
     app.put("/api/users/:id", UserController.update);
     app.get("/api/user/get/:id", UserController.get);
+    app.get("/api/users/get", UserController.getAllUsers);
 
     //path for adding workouts to user
     app.put("/api/users/:id/add", UserController.add);
@@ -15,4 +16,7 @@ module.exports = (app) => {
 
     //path for creating a user (testing only, don't use for final app)
     app.post("/api/users/create", UserController.createUser)
+
+    //path for switching admin
+    app.put("/api/users/admin/:id", UserController.admin)
 }
