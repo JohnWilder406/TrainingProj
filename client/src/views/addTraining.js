@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col } from  'react-bootstrap';
+import { Container, Card, Form, Row, Col, Nav, Navbar, Button } from  'react-bootstrap';
 import ModularForm from '../components/form';
+
+
 
 const AddTraining = (props) => {
     const [errors, setErrors] = useState({})
@@ -20,7 +22,8 @@ const AddTraining = (props) => {
                 if(res.data.errors) {
                     setErrors(res.data.errors)
                 } else {
-                    navigate('/admin/main')
+
+                    navigate('/admin/training/' + res.data._id + '/addworkout')
                 }
             })
             .catch((err) => {
@@ -33,6 +36,12 @@ const AddTraining = (props) => {
     return (
         <Container>
             <h1>Add Training Plan Page</h1>
+            <Navbar bg="dark" variant="dark">
+                <Navbar.Brand>Crusher Training App</Navbar.Brand>
+                <Nav className="mr-auto">
+                    <Button variant="outline-dark"><Link to="/admin/main">Main Page</Link></Button>
+                </Nav>
+            </Navbar>
             <ModularForm object={plan} setObject={setPlan} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Plan"} />
         </Container>
     )

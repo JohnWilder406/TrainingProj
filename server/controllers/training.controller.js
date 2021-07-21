@@ -1,12 +1,11 @@
 const Training = require("../models/training.model");
 
 module.exports.createTraining = (req,res) => {
-    const {name, duration, difficulty, workouts} = req.body;
+    const {name, duration, difficulty} = req.body;
     Training.create({
         name,
-        duration,
         difficulty,
-        workouts
+        duration
     })
         .then(plan=> res.json(plan))
         .catch(err => res.json(err))
@@ -23,6 +22,12 @@ module.exports.getTraining = (req,res) => {
         .then(plan => res.json(plan))
         .catch(err => res.json(err))
 }
+
+// module.exports.getWorkout = (req, res) => {
+//     Training.findById(req.params.id)
+//         .then(workout => res.json(workout))
+//         .catch(err => res.json(err))
+// }
 
 module.exports.updateTraining= (req, res) => {
     Training.findByIdAndUpdate(req.params.id, req.body, {
@@ -46,5 +51,14 @@ module.exports.createWorkout= (req, res) => {
             workouts: req.body.workout
         }})
         .then(updatedPlan => res.json(updatedPlan))
+        .catch(err => res.json(err))
+}
+
+module.exports.updateWorkout = (req, res) => {
+    Training.updateOne({'workouts._id': req.params.id},
+        {'$set': {
+            workouts: req.body.workout
+        }})
+        .then(updatedWorkout => res.json(updatedWorkout))
         .catch(err => res.json(err))
 }
