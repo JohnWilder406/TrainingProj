@@ -8,5 +8,4 @@ module.exports = function(app){
     app.delete('/api/plans/:id',TrainingController.deleteTraining);
     app.put('/api/plans/:id/add_workout', TrainingController.createWorkout);
     app.put('/api/plans/:id/edit_workout', TrainingController.updateWorkout);
-    // app.get('/api/plans/workout/:id', TrainingController.getWorkout);
 }
