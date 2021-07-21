@@ -120,4 +120,5 @@ module.exports = {
 
 
     //use this controller to switch complete from false to true (not sure if we need this- i'll build it if needed)
+    // I think we need a controller for getting a users Workout for the day.
 }
