@@ -16,6 +16,7 @@ import Profile from './views/profile';
 import UserProgress from './views/userProgress';
 import {Redirect, Router} from '@reach/router'
 import Wrapper from './components/wrapper';
+import UserList from './components/userList';
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
             <AddWorkout path="/admin/training/:id/addworkout" />
             <EditWorkout path="/admin/training/:id/editworkout" />
             <UserProgress path="/admin/userprogress" />
+            <UserList path="/admin/userlist" />
             </>
           ) : (
             <Redirect from="/admin" to="/" />
