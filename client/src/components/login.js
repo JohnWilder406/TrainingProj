@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Card, Form, Button, Row, Col, Container, Modal} from 'react-bootstrap';
 import axios from 'axios'
 import { Link, navigate } from '@reach/router';
+import { LoginContext } from '../context/context';  
 
 
 const Login = (props) => {
+    const {setId} = useContext(LoginContext);
     const {setToken} = props;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -25,12 +27,14 @@ const Login = (props) => {
             withCredentials: true
         })
         .then((res) => {
-            setToken(true)
+            console.log(res)
+            setId(res.data.userId)
+            // setToken(true)
             navigate("/main")
         })
         .catch(err => {
-            console.log(err.response);
-            setErrorMessage(err.response.data.message);
+            console.log(err);
+            // setErrorMessage(err.response);
             setShow(true)
         })
     }
