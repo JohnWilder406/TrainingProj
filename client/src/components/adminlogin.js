@@ -16,7 +16,7 @@ const AdminLogin = (props) => {
     //login function
     const login = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8000/api/users/login", {
+        axios.post("http://localhost:8000/api/admin/login", {
             email: email,
             password: password,
         },

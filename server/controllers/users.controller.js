@@ -27,7 +27,7 @@ module.exports = {
                 } else {
                     bcrypt.compare(req.body.password, userRecord.password)
                         .then((passwordValid) => {
-                            if(passwordValid && userRecord.admin) {
+                            if(passwordValid) {
                                 console.log("password is valid");
                                 res
                                     .cookie("usertoken", 
@@ -130,9 +130,44 @@ module.exports = {
         User.find({})
             .then(user => res.json(user))
             .catch(err => res.json(err))
-    }
+    },
 
+    adminLogin: (req, res) => {
+        console.log(req.body);
 
-    //use this controller to switch complete from false to true (not sure if we need this- i'll build it if needed)
-    // I think we need a controller for getting a users Workout for the day.
+        User.findOne({ email: req.body.email  })
+            .then((userRecord) => {
+                if(userRecord === null) {
+                    res.status(400).json({ message: "email address not found" })
+                } else {
+                    bcrypt.compare(req.body.password, userRecord.password)
+                        .then((passwordValid) => {
+                            if(passwordValid && userRecord.admin) {
+                                console.log("password is valid");
+                                res
+                                    .cookie("usertoken", 
+                                    jwt.sign({
+                                        user_id: userRecord._id, 
+                                        username: userRecord.firstName
+                                    }, process.env.JWT_SECRET),
+                                    {
+                                        expires: new Date(Date.now() + 9000000), httpOnly: true
+                                    }                            
+                                    )
+                                    .json({
+                                        message: "Successfully logged in",
+                                        userLoggedIn: userRecord.firstName,
+                                        userId: userRecord._id
+                                    })
+                            } else {
+                                res.status(400).json({message: "password doesn't match"})
+                            }
+                        })
+                }
+            })
+            .catch((err) => {
+                console.log("login not successful");
+                res.json(err)
+            })
+    },
 }

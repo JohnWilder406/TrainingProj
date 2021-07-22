@@ -19,4 +19,7 @@ module.exports = (app) => {
 
     //path for switching admin
     app.put("/api/users/admin/:id", UserController.admin)
+
+    //path for admin logins
+    app.post("/api/admin/login", UserController.adminLogin);
 }
