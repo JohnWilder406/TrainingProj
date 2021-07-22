@@ -15,6 +15,8 @@ import Main from './views/main';
 import Profile from './views/profile';
 import UserProgress from './views/userProgress';
 import {Redirect, Router} from '@reach/router'
+import Wrapper from './components/wrapper';
+import UserList from './components/userList';
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
 
   return (
     <div className="App">
+    <Wrapper>
       <Router>
         <Login path="/" setToken={true} />
         <Register path="/register" />
@@ -37,7 +40,9 @@ function App() {
           <Redirect from="/main" to="/" noThrow/>
         )
         }
+
       </Router>
+    </Wrapper>
       <Router>
         <AdminLogin path="/admin" setAdmin={setAdmin} />
         {
@@ -49,6 +54,7 @@ function App() {
             <AddWorkout path="/admin/training/:id/addworkout" />
             <EditWorkout path="/admin/training/:id/editworkout" />
             <UserProgress path="/admin/userprogress" />
+            <UserList path="/admin/userlist" />
             </>
           ) : (
             <Redirect from="/admin" to="/" />

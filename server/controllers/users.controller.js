@@ -27,7 +27,7 @@ module.exports = {
                 } else {
                     bcrypt.compare(req.body.password, userRecord.password)
                         .then((passwordValid) => {
-                            if(passwordValid) {
+                            if(passwordValid && userRecord.admin) {
                                 console.log("password is valid");
                                 res
                                     .cookie("usertoken", 
@@ -42,6 +42,7 @@ module.exports = {
                                     .json({
                                         message: "Successfully logged in",
                                         userLoggedIn: userRecord.firstName,
+                                        userId: userRecord._id
                                     })
                             } else {
                                 res.status(400).json({message: "password doesn't match"})
@@ -72,6 +73,7 @@ module.exports = {
             .catch(err => res.json(err))
     },
 
+    //gets User data as a whole (profile and workouts- workouts is res.data.workouts)
     get: (req,res) => {
         User.findOne({_id: req.params.id})
             .then(user => res.json(user))
@@ -97,6 +99,12 @@ module.exports = {
         .then(updatedWorkout => res.json(updatedWorkout))
         .catch(err => res.json(err))
     },
+
+    admin: (req, res) => {
+        User.findByIdAndUpdate(req.params.id, req.body)
+            .then(admin => res.json(admin))
+            .catch(err => res.json(err))
+    },
     
     //create user controller for testing
     createUser: (req, res) => {
@@ -114,6 +122,12 @@ module.exports = {
             weight,
             admin
         })
+            .then(user => res.json(user))
+            .catch(err => res.json(err))
+    },
+
+    getAllUsers: (req,res) => {
+        User.find({})
             .then(user => res.json(user))
             .catch(err => res.json(err))
     }

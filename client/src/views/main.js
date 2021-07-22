@@ -1,22 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Button } from  'react-bootstrap';
 import Calendar from 'react-calendar';
 import Navbar from '../components/Navbar';
+import {LoginContext} from '../context/context';
+
+//random number generator for api call for quote 
+function randomNum() {
+    let num = Math.floor(Math.random()*1644)
+
+    return num
+}
 
 const Main = (props) => {
+    const {id} = useContext(LoginContext);
     var date = new Date().toDateString();
-
     const [user, setUser] = useState();
     const [quote, setQuote] = useState("");
 
-    //Going to work on this tomorrow. Running into an error. 'https://zenquotes.io/api/today' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+    console.log(id)
+
+
     useEffect(() => {
-        axios.get('https://zenquotes.io/api/quote/')
+        let idx = randomNum();
+        axios.get('https://type.fit/api/quotes')
             .then((res) =>{
-                console.log(res);
-                setQuote(res.data);
+                console.log(res.data);
+                setQuote(res.data[idx].text);
             })
             .catch((err) => {
                 console.log(err);
@@ -24,7 +35,7 @@ const Main = (props) => {
     }, [])
 
     useEffect(() => {
-        axios.get('/api/user/get/:id')
+        axios.get('http://localhost:8000/api/user/get/' + id)
             .then((res) => {
                 console.log(res);
                 setUser(res.data);
@@ -39,12 +50,12 @@ const Main = (props) => {
         <div>
             <h1>User Main Page</h1>
             <Navbar />
-            <Container>
+            <div className="container">
                 <h5 align="center">{date}</h5>
                 <blockquote className="blockquote">
                     <p>{quote}</p>
                 </blockquote>
-            </Container>
+            </div>
             <div className=" container row" >
                 <div className=" col-4 panel">
                     <div className="panel-heading">
@@ -56,7 +67,7 @@ const Main = (props) => {
                         <p>Intensity</p>
                         <p>Difficulty</p>
                     </div>
-                    <div class="panel-footer">
+                    <div className="panel-footer">
                         <Button btn btn-Defualt>Complete</Button>
                     </div>
                 </div>
