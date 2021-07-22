@@ -7,7 +7,7 @@ import {LoginContext} from '../context/context';
 
 const Navigation = (props) => {
     const {id} = useContext(LoginContext);
-    //Need to add user id for navigation, and functionality for Search.   
+    //Need to add functionality for Search.   
     
 
     return (
@@ -15,9 +15,9 @@ const Navigation = (props) => {
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand>Crusher Training App</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Button variant="outline-dark"><Link to="/main">Home</Link></Button>
-                    <Button variant="outline-dark"><Link to={"/users/" + id + "/newworkout"}>New Workout</Link></Button>
-                    <Button variant="outline-dark"><Link to={"/users/" + id + "/profile"}>Edit Profile</Link></Button>
+                    <Button className="btn btn-link" variant="outline-dark" onClick={(e) => navigate('/main')}>Home</Button>
+                    <Button className="btn btn-link" variant="outline-dark" onClick={(e) => navigate('/users/' + id + '/newworkout')}>New Workout</Button>
+                    <Button className="btn btn-link" variant="outline-dark" onClick={(e) => navigate('/users/' + id + '/profile')}>Edit Profile</Button>
                 </Nav>
                 <Search  />
             </Navbar>

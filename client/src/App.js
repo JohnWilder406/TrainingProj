@@ -27,7 +27,7 @@ function App() {
     <div className="App">
     <Wrapper>
       <Router>
-        <Login path="/" setToken={true} />
+        <Login path="/" setToken={setToken} />
         <Register path="/register" />
         { token ? (
           <>
