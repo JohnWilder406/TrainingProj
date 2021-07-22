@@ -19,6 +19,9 @@ const Main = (props) => {
     const [user, setUser] = useState();
     const [quote, setQuote] = useState("");
 
+    const test = new Date();
+    console.log(test)
+
 
     useEffect(() => {
         let idx = randomNum();

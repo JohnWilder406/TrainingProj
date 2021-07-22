@@ -29,7 +29,7 @@ const ModularForm = (props) => {
                             <Form.Control
                                 type="text"
                                 name="name"
-                                value={object.name}
+                                value={object.name ? object.name : ""}
                                 onChange={(e) => inputChange(e)} />
                             {
                                 errors.name ? <span className="error">{errors.name.message}</span> : null
@@ -44,7 +44,7 @@ const ModularForm = (props) => {
                             <Form.Control
                                 as="select"
                                 name="difficulty"
-                                value={object.difficulty}
+                                value={object.difficulty ? object.difficulty : ""}
                                 onChange={(e) => inputChange(e)}>
                                 <option>Select Difficulty</option>
                                 <option value="easy">Easy</option>
@@ -65,7 +65,7 @@ const ModularForm = (props) => {
                             <Form.Control
                                 as="select"
                                 name="duration"
-                                value={object.duration}
+                                value={object.duration ? object.duration : ""}
                                 onChange={(e) => inputChange(e)}>
                                 <option>Select Duration</option>
                                 <option value="42">6 weeks</option>
