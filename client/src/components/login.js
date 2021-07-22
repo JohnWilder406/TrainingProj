@@ -34,8 +34,8 @@ const Login = (props) => {
             navigate("/main");            
         })
         .catch(err => {
-            console.log(err.response);
-            setErrorMessage(err.response);
+            console.log(err);
+            // setErrorMessage(err.response);
             setShow(true);
         });
     }

@@ -19,7 +19,8 @@ const Main = (props) => {
     const [user, setUser] = useState();
     const [quote, setQuote] = useState("");
 
-    console.log(id)
+    const test = new Date();
+    console.log(test)
 
 
     useEffect(() => {
