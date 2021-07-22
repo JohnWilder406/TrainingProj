@@ -29,8 +29,7 @@ module.exports = {
                         .then((passwordValid) => {
                             if(passwordValid) {
                                 console.log("password is valid");
-                                res
-                                    .cookie("usertoken", 
+                                res.cookie("usertoken", 
                                     jwt.sign({
                                         user_id: userRecord._id, 
                                         username: userRecord.firstName

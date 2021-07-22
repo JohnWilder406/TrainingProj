@@ -12,6 +12,7 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [show, setShow] = useState(false);
+    const [errors, setErrors] = useState({});
 
     //modal close function for error popup
     const handleClose = () => setShow(false);
@@ -27,16 +28,16 @@ const Login = (props) => {
             withCredentials: true
         })
         .then((res) => {
-            console.log(res)
-            setId(res.data.userId)
-            // setToken(true)
-            navigate("/main")
+            console.log(res);
+            setId(res.data.userId);
+            setToken(true);
+            navigate("/main");            
         })
         .catch(err => {
-            console.log(err);
-            // setErrorMessage(err.response);
-            setShow(true)
-        })
+            console.log(err.response);
+            setErrorMessage(err.response);
+            setShow(true);
+        });
     }
 
 
@@ -63,7 +64,9 @@ const Login = (props) => {
         </Card.Body>
         <Link style={{margin: 'auto'}} to="/register">Not registered? Click here.</Link>
     </Card>
-    <Modal show={show} onHide={handleClose}>
+
+    {/* The animation = false removes an error for the findDOMNode depreciated warning.  */}
+    <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Body className="error text-center">
             {errorMessage}
         </Modal.Body>

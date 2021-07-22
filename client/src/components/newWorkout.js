@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 
 const NewWorkout = (props) => {
     return (
-        <div class="container">
+        <div className="container">
             <h1>newWorkout page (user)</h1>
             <Navbar />
         </div>

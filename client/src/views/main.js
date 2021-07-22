@@ -52,11 +52,11 @@ const Main = (props) => {
             <Navbar />
             <div className="container">
                 <h5 align="center">{date}</h5>
-                <blockquote class="blockquote">
+                <blockquote className="blockquote">
                     <p>{quote}</p>
                 </blockquote>
             </div>
-            <div className=" container row" >
+            <div className="container row" >
                 <div className=" col-4 panel">
                     <div className="panel-heading">
                     <h3 className="panel-title">Work Out Details</h3>
