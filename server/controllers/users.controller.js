@@ -27,10 +27,11 @@ module.exports = {
                 } else {
                     bcrypt.compare(req.body.password, userRecord.password)
                         .then((passwordValid) => {
-                            if(passwordValid && userRecord.admin) {
+                            //Users can't log in with this.
+                            // if(passwordValid && userRecord.admin)
+                            if(passwordValid === true) {
                                 console.log("password is valid");
-                                res
-                                    .cookie("usertoken", 
+                                res.cookie("usertoken", 
                                     jwt.sign({
                                         user_id: userRecord._id, 
                                         username: userRecord.firstName

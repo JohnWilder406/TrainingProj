@@ -56,7 +56,7 @@ const Main = (props) => {
                     <p>{quote}</p>
                 </blockquote>
             </div>
-            <div className=" container row" >
+            <div className="container row" >
                 <div className=" col-4 panel">
                     <div className="panel-heading">
                     <h3 className="panel-title">Work Out Details</h3>
