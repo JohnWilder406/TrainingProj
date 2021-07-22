@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Button, Navbar} from  'react-bootstrap';
+import { Container, Card, Form, Row, Col, Button, Nav, Navbar} from  'react-bootstrap';
 import Search from './Search';
 
 const Navigation = (props) => {
@@ -9,23 +9,16 @@ const Navigation = (props) => {
     
 
     return (
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/main">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href={"/users/:id/newworkout"}>New Workout</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href={"/users/:id/profile"}>Edit Profile</a>
-                        </li>
-                    </ul>
-                    <Search  />
-                </div>
-            </nav>
+        <div className="container">
+            <Navbar bg="dark" variant="dark">
+                <Navbar.Brand>Crusher Training App</Navbar.Brand>
+                <Nav className="mr-auto">
+                    <Button variant="outline-dark"><Link to="/main">Home</Link></Button>
+                    <Button variant="outline-dark"><Link to="/users/:id/newworkout">New Workout</Link></Button>
+                    <Button variant="outline-dark"><Link to="/users/:id/profile">Edit Profile</Link></Button>
+                </Nav>
+                <Search  />
+            </Navbar>
         </div>
     )
 }
