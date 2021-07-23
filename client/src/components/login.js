@@ -16,6 +16,7 @@ const Login = (props) => {
 
     //modal close function for error popup
     const handleClose = () => setShow(false);
+    
 
     //login function
     const login = (e) => {
@@ -29,8 +30,8 @@ const Login = (props) => {
         })
         .then((res) => {
             console.log(res);
-            setId(res.data.userId);
             setToken(true);
+            setId(res.data.userId);
             navigate("/main");            
         })
         .catch(err => {

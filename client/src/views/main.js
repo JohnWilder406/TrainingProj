@@ -19,9 +19,6 @@ const Main = (props) => {
     const [user, setUser] = useState();
     const [quote, setQuote] = useState("");
 
-    const test = new Date();
-    console.log(test)
-
 
     useEffect(() => {
         let idx = randomNum();
@@ -40,6 +37,7 @@ const Main = (props) => {
             .then((res) => {
                 console.log(res);
                 setUser(res.data);
+                console.log("user " + user)
             })
             .catch((err) => {
                 console.log(err);
@@ -63,13 +61,13 @@ const Main = (props) => {
                     <h3 className="panel-title">Work Out Details</h3>
                     </div>
                     <div className="panel-body">
-                    <p>Workout Name</p>
+                        <p>Workout Name</p>
                         <p>Duration</p>
                         <p>Intensity</p>
                         <p>Difficulty</p>
                     </div>
                     <div className="panel-footer">
-                        <Button btn btn-Defualt>Complete</Button>
+                        {/* <Button className="btn btn-defualt">Complete</Button> */}
                     </div>
                 </div>
 
