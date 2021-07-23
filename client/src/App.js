@@ -8,7 +8,7 @@ import Register from './components/register';
 import AddTraining from './views/addTraining';
 import AddWorkout from './views/addWorkout';
 import AdminMain from './views/adminMain';
-import Calendar from './views/calendar';
+import CalendarComp from './views/calendar';
 import EditTraining from './views/editTraining';
 import EditWorkout from './views/editWorkout';
 import Main from './views/main';
@@ -34,7 +34,7 @@ function App() {
           <Main path="/main" />
           <NewWorkout path="/users/:id/newworkout" />
           <Profile path="/users/:id/profile" />
-          <Calendar path="/users/:id/calendar" />
+          <CalendarComp path="/users/:id/calendar" />
           </>
         ) : (
           <Redirect from="/main" to="/" noThrow/>
