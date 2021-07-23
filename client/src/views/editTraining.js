@@ -80,7 +80,15 @@ const EditTraining = (props) => {
                             {
                                 workouts.map((plan, idx) => {
                                     return (
-                                        <tr key={idx}><td>{plan.name}</td><td>{plan.duration}</td><td>{plan.intensity}</td><td>{plan.difficulty}</td><td>{plan.frequency}</td><td><Button variant="none"><Link to={"/admin/training/" + plan._id + "/editworkout"} state={{trainingid: id}}>Edit Workout</Link></Button><Button variant="none"><Link to={'/admin/training/' + id + '/addworkout'}>Add Workout</Link></Button></td></tr>
+                                        <tr key={idx}>
+                                            <td>{plan.name}</td>
+                                            <td>{plan.duration}</td>
+                                            <td>{plan.intensity}</td>
+                                            <td>{plan.difficulty}</td>
+                                            <td>{plan.frequency}</td>
+                                            <td><Button variant="none"><Link to={"/admin/training/" + plan._id + "/editworkout"} state={{trainingid: id}}>Edit Workout</Link></Button>
+                                            <Button variant="none"><Link to={'/admin/training/' + id + '/addworkout'}>Add Workout</Link></Button></td>
+                                        </tr>
                                     )
                                 })
                             }
