@@ -93,7 +93,8 @@ module.exports = {
     complete: (req, res) => {
         User.updateOne({'workouts._id': req.params.workoutid},
         {'$set': {
-            'workouts.$.number': req.body.number
+            'workouts.$.number': req.body.number,
+            'workouts.$.startdate': req.body.startdate
         }})
         .then(updatedWorkout => res.json(updatedWorkout))
         .catch(err => res.json(err))

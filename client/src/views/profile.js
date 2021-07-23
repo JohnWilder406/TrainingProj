@@ -21,7 +21,7 @@ const Profile = (props) => {
     });
 
 
-    
+    //updates form data
     const handleChange = (e) => {
         let newUser = { ...user};
         console.log(e.target.name)
@@ -30,6 +30,7 @@ const Profile = (props) => {
         console.log(user)
     }
 
+    //gets user data to populate form
     useEffect(() => {
         axios.get('http://localhost:8000/api/user/get/' + idx)
             .then((res) => {
@@ -41,6 +42,7 @@ const Profile = (props) => {
             });
     }, []);
 
+    //updates user data in db
     const updateProfile = (e) => {
         e.preventDefault();
         axios.put('http://localhost:8000/api/users/' + idx, user)
@@ -58,6 +60,7 @@ const Profile = (props) => {
             });
     }
 
+    //retrieves plans from db for form options
     useEffect(() => {
         axios.get('http://localhost:8000/api/plans')
             .then((res) => {

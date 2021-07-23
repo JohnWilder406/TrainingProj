@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Button } from  'react-bootstrap';
-// import Calendar from 'react-calendar';
 import Navbar from '../components/Navbar';
 import {LoginContext} from '../context/context';
 import moment from 'moment';
@@ -27,7 +26,21 @@ function mapper(arr) {
 }
 
 // date adding function 
-function addDays(date, days) {
+function addDays(date, freq) {
+    let days = 0
+    if (freq === 1) {
+        days = 7
+    } else if(freq === 2) {
+        days = 3
+    } else if(freq === 3) {
+        days = 2
+    } else if(freq === 4) {
+        days = 2
+    } else if(freq === 7) {
+        days = 1
+    } else {
+        days = 1000
+    }
     var result = new Date(date);
     result.setDate(result.getDate() + days);
     return result
@@ -47,6 +60,7 @@ const Main = (props) => {
         title: "No User Found"
     }])
     const [workout, setWorkout] = useState({});
+    const [newWorkout, setNewWorkout] = useState({});
 
     console.log(id)
 
@@ -61,7 +75,7 @@ const Main = (props) => {
         }
         return newObj
 }
-
+    //calls daily quote
     useEffect(() => {
         let idx = randomNum();
         axios.get('https://type.fit/api/quotes')
@@ -73,6 +87,7 @@ const Main = (props) => {
             })
     }, [])
 
+    //calls user data and populates current workout and calendar data
     useEffect(() => {
         axios.get('http://localhost:8000/api/user/get/' + id)
             .then((res) => {
@@ -87,12 +102,36 @@ const Main = (props) => {
             });
     }, []);
 
+    //updates workout object to push start date forward and remove a workout from the total count.
     const workoutComplete = (e) => {
         e.preventDefault();
+        let newDate = addDays(workout.startdate, workout.frequency)
         let newWorkout = {...workout};
-        newWorkout.number = workout.number - 1
-        newWorkout.startdate = workout.startdate
+        if(workout.number === 1) {
+            newWorkout.complete = true
+            newWorkout.number = workout.number - 1
+            newDate = addDays(workout.startdate, 1000)
+        } else {
+            newWorkout.number = workout.number - 1
+            newDate = addDays(workout.startdate, workout.frequency)
+        }
+        newWorkout.startdate = newDate
+        setNewWorkout(newWorkout)
     }
+
+    //updates workout object in database and repopulates the page with current data
+    useEffect(() => {
+        axios.put('http://localhost:8000/api/users/' + id + '/complete/' + workout._id, newWorkout)
+            .then((res) => {
+                console.log(res)
+                axios.get('http://localhost:8000/api/user/get/'+ id)
+                    .then((res) => {
+                        console.log(res.data)
+                        setEvents(mapper(res.data.workouts))
+                        setWorkout(today(res.data.workouts))
+                    })
+            })
+    }, [newWorkout])
     
 
     return (
@@ -110,7 +149,7 @@ const Main = (props) => {
                     <div className="panel-heading">
                     <h3 className="panel-title">Work Out Details</h3>
                     </div>
-                    <Form>
+                    <Form onSubmit={(e) => {workoutComplete(e)}}>
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm={2}>
                                 Workout:
