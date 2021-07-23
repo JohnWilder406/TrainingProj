@@ -33,7 +33,7 @@ function App() {
           <>
           <Main path="/main" />
           <NewWorkout path="/users/:id/newworkout" />
-          <Profile path="/users/:id/profile" />
+          <Profile path="/users/:idx/profile" />
           <CalendarComp path="/users/:id/calendar" />
           </>
         ) : (

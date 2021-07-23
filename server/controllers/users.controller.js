@@ -107,14 +107,13 @@ module.exports = {
     
     //create user controller for testing
     createUser: (req, res) => {
-        const {firstName, lastName, email, password, training, difficulty, workouts, birthday, height, weight, admin} = req.body;
+        const {firstName, lastName, email, password, training, workouts, birthday, height, weight, admin} = req.body;
         User.create({
             firstName,
             lastName,
             email,
             password,
             training,
-            difficulty,
             workouts,
             birthday,
             height,

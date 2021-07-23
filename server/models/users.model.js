@@ -16,6 +16,18 @@ const WorkoutSchema = new mongoose.Schema({
     },
     complete: {
         type: Boolean
+    },
+    duration: {
+        type: Number
+    },
+    intensity: {
+        type: String,
+    },
+    difficulty: {
+        type: String
+    },
+    frequency: {
+        type: Number
     }
 })
 
@@ -46,10 +58,6 @@ const UserSchema = new mongoose.Schema({
     },
 
     training: {
-        type: String,
-    },
-
-    difficulty: {
         type: String,
     },
 
