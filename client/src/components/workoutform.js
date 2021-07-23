@@ -113,10 +113,7 @@ const WorkoutForm = (props) => {
                                 <option value="1">Once a week</option>
                                 <option value="2">2x per week</option>
                                 <option value="3">3x per week</option>
-                                <option value="4">4x per week</option>
-                                <option value="5">Weekdays</option>
-                                <option value="6">Daily w/ 1 rest day</option>
-                                <option value="7">Daily no rest day</option>
+                                <option value="7">Daily</option>
                             </Form.Control>
                                 {
                                     errors.description ? <span className="error">{errors.description.message}</span> :

@@ -26,6 +26,14 @@ function mapper(arr) {
     return newArr
 }
 
+// date adding function 
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result
+}
+
+
 const Main = (props) => {
     const {id} = useContext(LoginContext);
     var date = new Date().toDateString();
@@ -42,6 +50,18 @@ const Main = (props) => {
 
     console.log(id)
 
+    // workout set function
+    function today(arr) {
+        let newObj = {}
+        for (var i = 0; i < arr.length; i++) {
+            let today = new Date(arr[i].startdate)
+            if(today.toDateString() === date) {
+                newObj = arr[i]
+            }
+        }
+        return newObj
+}
+
     useEffect(() => {
         let idx = randomNum();
         axios.get('https://type.fit/api/quotes')
@@ -56,14 +76,23 @@ const Main = (props) => {
     useEffect(() => {
         axios.get('http://localhost:8000/api/user/get/' + id)
             .then((res) => {
-                console.log(res);
+                console.log(res.data.workouts)
+                console.log(date);
                 setUser(res.data);
                 setEvents(mapper(res.data.workouts))
+                setWorkout(today(res.data.workouts))
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
+
+    const workoutComplete = (e) => {
+        e.preventDefault();
+        let newWorkout = {...workout};
+        newWorkout.number = workout.number - 1
+        newWorkout.startdate = workout.startdate
+    }
     
 
     return (
@@ -81,14 +110,54 @@ const Main = (props) => {
                     <div className="panel-heading">
                     <h3 className="panel-title">Work Out Details</h3>
                     </div>
-                    <div className="panel-body">
-                        <p>Workout Name</p>
-                        <p>Duration</p>
-                        <p>Intensity</p>
-                        <p>Difficulty</p>
-                    </div>
+                    <Form>
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column sm={2}>
+                                Workout:
+                            </Form.Label>
+                            <Col sm={5}>
+                                <Form.Control
+                                    readOnly plaintext
+                                    name="name"
+                                    value={workout.name ? workout.name : "No Workout Today"}  />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column sm={2}>
+                                Duration:
+                            </Form.Label>
+                            <Col sm={5}>
+                                <Form.Control
+                                    readOnly plaintext
+                                    name="duration"
+                                    value={workout.duration ? workout.duration + " mins": 0}  />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column sm={2}>
+                                Intensity:
+                            </Form.Label>
+                            <Col sm={5}>
+                                <Form.Control
+                                    readOnly plaintext
+                                    name="intensity"
+                                    value={workout.intensity ? workout.intensity : "None"}  />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column sm={2}>
+                                Difficulty:
+                            </Form.Label>
+                            <Col sm={5}>
+                                <Form.Control
+                                    readOnly plaintext
+                                    name="difficulty"
+                                    value={workout.difficulty ? workout.difficulty : "None"}  />
+                            </Col>
+                        </Form.Group>
+                        <Button type="submit">Workout Complete</Button>
+                    </Form>
                     <div className="panel-footer">
-                        {/* <Button className="btn btn-defualt">Complete</Button> */}
                     </div>
                 </div>
 
