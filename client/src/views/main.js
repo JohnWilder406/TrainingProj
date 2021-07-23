@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Button } from  'react-bootstrap';
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
 import Navbar from '../components/Navbar';
 import {LoginContext} from '../context/context';
+import moment from 'moment';
+import CalendarComp from './calendar';
 
 //random number generator for api call for quote 
 function randomNum() {
@@ -13,18 +15,37 @@ function randomNum() {
     return num
 }
 
+// events list mapping function for calendar
+function mapper(arr) {
+    let newArr = []
+    for (var i = 0; i < arr.length; i++) {
+        let obj = {start: moment(arr[i].startdate), end: moment(arr[i].startdate), title: arr[i].name}
+        newArr.push(obj)
+    }
+
+    return newArr
+}
+
 const Main = (props) => {
     const {id} = useContext(LoginContext);
     var date = new Date().toDateString();
     const [user, setUser] = useState();
     const [quote, setQuote] = useState("");
+    const [events, setEvents] = useState([{
+        start: moment().toDate(),
+        end: moment()
+            .add(1, "days")
+            .toDate(),
+        title: "No User Found"
+    }])
+    const [workout, setWorkout] = useState({});
 
+    console.log(id)
 
     useEffect(() => {
         let idx = randomNum();
         axios.get('https://type.fit/api/quotes')
             .then((res) =>{
-                console.log(res.data);
                 setQuote(res.data[idx].text);
             })
             .catch((err) => {
@@ -37,7 +58,7 @@ const Main = (props) => {
             .then((res) => {
                 console.log(res);
                 setUser(res.data);
-                console.log("user " + user)
+                setEvents(mapper(res.data.workouts))
             })
             .catch((err) => {
                 console.log(err);
@@ -72,7 +93,7 @@ const Main = (props) => {
                 </div>
 
                 <div className=" col-8">
-                    <Calendar className="calendar" />
+                    <CalendarComp eventList={events} />
                 </div>  
             </div>
         </div>
