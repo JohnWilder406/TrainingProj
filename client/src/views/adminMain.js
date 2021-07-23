@@ -52,7 +52,7 @@ const AdminMain = (props) => {
                 <Navbar.Brand>Crusher Training App</Navbar.Brand>
                 <Nav className="mr-auto">
                     <Button variant="outline-dark"><Link to="/admin/addplan">New Training Plan</Link></Button>
-                    <Button variant="outline-dark"><Link to="">User Progress</Link></Button>
+                    <Button variant="outline-dark"><Link to="/admin/userprogress">User Progress</Link></Button>
                 </Nav>
                 <Logout />
                 <Search searchQuery={searchQuery} onChange={updateInput} />
