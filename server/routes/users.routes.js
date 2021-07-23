@@ -12,7 +12,7 @@ module.exports = (app) => {
     app.put("/api/users/:id/add", UserController.add);
 
     //path for completing a workout. this route replaces number left, so please do math on front end from original number and replace, do not subtract.
-    app.put("/api/users/:id/complete", UserController.complete);
+    app.put("/api/users/:id/complete/:workoutid", UserController.complete);
 
     //path for creating a user (testing only, don't use for final app)
     app.post("/api/users/create", UserController.createUser)

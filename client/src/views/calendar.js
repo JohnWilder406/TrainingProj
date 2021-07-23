@@ -8,36 +8,15 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment)
 
-// function mapper(arr) {
-//     let newArr = []
-//     for (var i = 0; i < arr.length; i++) {
-//         let obj = {start: moment(arr[i].startdate), end: moment(arr[i].startdate), title: arr[i].name}
-//         newArr.push(obj)
-//     }
-
-//     return newArr
-// }
+const DateWrapper = ({children}) => 
+    React.cloneElement(React.Children.only(children),{
+        style: {
+            backgroundColor: 'lightblue',
+        },
+    })
 
 const CalendarComp = (props) => {
     const {eventList} = props
-    // const [user, setUser] = useState({})
-    // const [events, setEvents] = useState([{
-    //     start: moment().toDate(),
-    //     end: moment()
-    //         .add(1, "days")
-    //         .toDate(),
-    //     title: "Testing"
-    // }])
-
-
-    // useEffect(() => {
-    //     axios.get('http://localhost:8000/api/user/get/' + id)
-    //         .then((res) => {
-    //             console.log(res.data)
-    //             setUser(res.data)
-    //             setEvents(mapper(res.data.workouts))
-    //         })
-    // }, [])
 
     return (
         <Container>
@@ -45,8 +24,12 @@ const CalendarComp = (props) => {
                 localizer={localizer}
                 defaultDate={new Date()}
                 defaultView="month"
+                views={['month', 'agenda']}
                 events={eventList}
                 style={{height:300}}
+                components={{
+                    timeSlotWrapper: DateWrapper,
+                }}
             />
         </Container>
     )
