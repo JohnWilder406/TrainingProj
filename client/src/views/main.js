@@ -138,13 +138,13 @@ const Main = (props) => {
         <div>
             <h1>User Main Page</h1>
             <Navbar />
-            <div className="container">
+            <Container>
                 <h5 align="center">{date}</h5>
                 <blockquote className="blockquote">
                     <p>{quote}</p>
                 </blockquote>
-            </div>
-            <div className="container row" >
+            </Container>
+            <Container as={Row}>
                 <div className=" col-4 panel">
                     <div className="panel-heading">
                     <h3 className="panel-title">Work Out Details</h3>
@@ -203,7 +203,7 @@ const Main = (props) => {
                 <div className=" col-8">
                     <CalendarComp eventList={events} />
                 </div>  
-            </div>
+            </Container>
         </div>
         
     )
