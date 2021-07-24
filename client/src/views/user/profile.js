@@ -72,7 +72,7 @@ const Profile = (props) => {
     return (
         <Container>
             <h1>Profile page</h1>
-            <Navbar />
+            <Navbar search={false}/>
             <Card border="dark" className="text-center">
                 <Card.Header style={{textAlign: "center", fontSize: "24px"}}>Edit Profile</Card.Header>
                 <Card.Body>

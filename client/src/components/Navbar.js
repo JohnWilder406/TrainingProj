@@ -8,6 +8,7 @@ import Logout from './Logout';
 
 const Navigation = (props) => {
     const {id} = useContext(LoginContext);
+    const {search, admin} = props
     //Need to add functionality for Search.   
     
 
@@ -20,8 +21,10 @@ const Navigation = (props) => {
                     <Button className="btn btn-link" variant="outline-dark" onClick={(e) => navigate('/users/' + id + '/newworkout')}>New Workout</Button>
                     <Button className="btn btn-link" variant="outline-dark" onClick={(e) => navigate('/users/' + id + '/profile')}>Edit Profile</Button>
                 </Nav>
-                <Logout />
-                <Search  />
+                <Logout admin={admin}/>
+                {
+                    search ? <Search /> : <span></span>
+                }
             </Navbar>
         </div>
     )
