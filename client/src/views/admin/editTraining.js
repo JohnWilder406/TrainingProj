@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Table, Button, Form, Row, Col, Navbar, Nav } from  'react-bootstrap';
-import ModularForm from '../components/form';
-import Search from '../components/Search';
+import ModularForm from '../../components/admin/form';
+import Search from '../../components/Search';
 
 const EditTraining = (props) => {
     const {id} = props;

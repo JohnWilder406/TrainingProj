@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Table, Button, Nav, Navbar } from  'react-bootstrap';
-import Search from './Search';
+import Search from '../Search'
+import DeleteButton from '../DeleteButton';
 
 const UserList = (props) => {
     const [userList, setUserList] = useState([]);
@@ -51,6 +52,14 @@ const UserList = (props) => {
         .catch(err => console.log(err));
     }
 
+    const afterDeleteHandler = (deletedPlanId) => {
+        let filteredUserArray = userList.filter((user) => {
+            return user._id !== deletedPlanId
+        })
+
+        setUserList(filteredUserArray)
+    }
+
     return (
         <Container>
         <h1>User List page</h1>
@@ -70,13 +79,14 @@ const UserList = (props) => {
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Admin?</th>
+                                <th>Delete User</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 userList.map((user, idx) => {
                                     return (
-                                        <tr key={idx}><td>{user.firstName}</td><td>{user.lastName}</td><td>{user.admin ? <Button variant="success" onClick={(e)=>adminChange(user, false)}>Yes</Button> : <Button variant="secondary" onClick={(e)=>adminChange(user, true)}>No</Button>}</td></tr>
+                                        <tr key={idx}><td>{user.firstName}</td><td>{user.lastName}</td><td>{user.admin ? <Button variant="success" onClick={(e)=>adminChange(user, false)}>Yes</Button> : <Button variant="secondary" onClick={(e)=>adminChange(user, true)}>No</Button>}</td><td><DeleteButton id={user._id} afterDeleteHandler={afterDeleteHandler} deleteLabel={"Delete " + user.firstName + "?"} mongoLabel={"users"} /></td></tr>
                                     )
                                 })
                             }

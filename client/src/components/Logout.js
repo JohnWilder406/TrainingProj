@@ -5,11 +5,16 @@ import {navigate} from '@reach/router'
 
 const Logout = (props) => {
     //logs user out by deleting cookie and navigating to login page.
+    const {admin} = props;
     const logout = () => {
         axios.post("http://localhost:8000/api/users/logout")
         .then((res) => {
             console.log(res.data);
-            navigate("/");
+            if(admin) {
+                navigate('/admin')
+            } else {
+                navigate("/");
+            }
         })
     }
 

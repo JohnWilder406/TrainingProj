@@ -22,4 +22,5 @@ module.exports = (app) => {
 
     //path for admin logins
     app.post("/api/admin/login", UserController.adminLogin);
+    app.delete("/api/users/:id", UserController.delete);
 }

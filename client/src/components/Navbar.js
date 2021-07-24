@@ -4,6 +4,7 @@ import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Button, Nav, Navbar} from  'react-bootstrap';
 import Search from './Search';
 import {LoginContext} from '../context/context';
+import Logout from './Logout';
 
 const Navigation = (props) => {
     const {id} = useContext(LoginContext);
@@ -19,6 +20,7 @@ const Navigation = (props) => {
                     <Button className="btn btn-link" variant="outline-dark" onClick={(e) => navigate('/users/' + id + '/newworkout')}>New Workout</Button>
                     <Button className="btn btn-link" variant="outline-dark" onClick={(e) => navigate('/users/' + id + '/profile')}>Edit Profile</Button>
                 </Nav>
+                <Logout />
                 <Search  />
             </Navbar>
         </div>

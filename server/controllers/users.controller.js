@@ -169,4 +169,10 @@ module.exports = {
                 res.json(err)
             })
     },
+
+    delete: (req, res) => {
+        User.deleteOne({_id: req.params.id})
+            .then(deleteConfirmation => res.json(deleteConfirmation))
+            .catch(err => res.json(err))
+    }
 }
