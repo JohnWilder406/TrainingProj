@@ -5,23 +5,33 @@ import { Container, Card, Form, Row, Col, Button, Table } from  'react-bootstrap
 import Navbar from '../Navbar';
 
 const NewWorkout = (props) => {
-    const [plan, setPlan] = useState({});
-    const [workouts, setWorkouts] = useState([]);
-
+    const [user, setUser] = useState([]);
+    const [training, setTraining] = useState([]);
+    const [workout, setWorkout] = useState([]);
+    const {id} = props;
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/plans')
             .then((res) => {
                 console.log(res);
-                setPlan(res.data);
-                setWorkouts(res.data.workouts);
-                console.log("workouts " + workouts.data);
+                setTraining(res.data);
             })
             .catch((err) => {
                 console.log(err);
             })
     }, []);
 
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/user/get/' + id)
+            .then((res) => {
+                console.log(res);
+                setUser(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, []);
+    
     return (
         <Container>
             <h1>New Workout (user)</h1>
@@ -47,6 +57,7 @@ const NewWorkout = (props) => {
                 </Card.Body>
             </Card>
             <div>
+                
                 <Table striped bordered hover variant="dark">
                     <thead>
                         <tr>
@@ -58,29 +69,30 @@ const NewWorkout = (props) => {
                             <th>Add</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {/* {
-                            workouts.map((plan, index) => (
-                                <tr key={index}>
-                                    <td>{plan.name}</td>
-                                    <td>{plan.duration}</td>
-                                    <td>{plan.intensity}</td>
-                                    <td>{plan.difficulty}</td>
-                                    <td>{plan.frequency}</td>
-                                    <td>Add</td>
-                                </tr>
-                            ))
-                        } */}
-                        <tr>
-                            <td>workout</td>
-                            <td>duration</td>
-                            <td>intensity</td>
-                            <td>difficulty</td>
-                            <td>freq/week</td>
-                            <td>add</td>
-                        </tr>
-                    </tbody>
-                    </Table>
+                    {/* Currently this is pulling all plans from db. So if there is more than one it would likely populate with other works */}
+                    {
+                        training.map((plan, index) => {
+                            return (
+                                <tbody key={index}>
+                                    {
+                                        plan.workouts.map((workouts, i) => {
+                                            return (
+                                                <tr key={i}>
+                                                    <td>{workouts.name}</td>
+                                                    <td>{workouts.duration}</td>
+                                                    <td>{workouts.intensity}</td>
+                                                    <td>{workouts.difficulty}</td>
+                                                    <td>{workouts.frequency}</td>
+                                                    <td>Add</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            )
+                        })
+                    }
+                </Table>
             </div>
         </Container>
     );
