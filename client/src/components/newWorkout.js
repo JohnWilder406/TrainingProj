@@ -57,6 +57,7 @@ const NewWorkout = (props) => {
                 </Card.Body>
             </Card>
             <div>
+                
                 <Table striped bordered hover variant="dark">
                     <thead>
                         <tr>
@@ -68,6 +69,7 @@ const NewWorkout = (props) => {
                             <th>Add</th>
                         </tr>
                     </thead>
+                    {/* Currently this is pulling all plans from db. So if there is more than one it would likely populate with other works */}
                     {
                         training.map((plan, index) => {
                             return (
