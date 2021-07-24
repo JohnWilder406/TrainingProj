@@ -4,6 +4,7 @@ import {navigate, Link} from '@reach/router';
 import { Container, Card, Table, Button, Form, Row, Col, Navbar, Nav } from  'react-bootstrap';
 import ModularForm from '../../components/admin/form';
 import Search from '../../components/Search';
+import DeleteWorkout from '../../components/admin/deleteWorkout';
 
 const EditTraining = (props) => {
     const {id} = props;
@@ -33,6 +34,14 @@ const EditTraining = (props) => {
         })
         setSearchQuery(searchQuery);
         setWorkouts(filtered)
+    }
+
+    const afterDeleteHandler = (deletedPlanId) => {
+        let filteredWorkoutArray = workouts.filter((workout) => {
+            return workout._id !== deletedPlanId
+        })
+
+        setWorkouts(filteredWorkoutArray)
     }
 
 
@@ -88,7 +97,7 @@ const EditTraining = (props) => {
                                             <td>{plan.difficulty}</td>
                                             <td>{plan.frequency}</td>
                                             <td><Button variant="none"><Link to={"/admin/training/" + plan._id + "/editworkout"} state={{trainingid: id}}>Edit Workout</Link></Button>
-                                            <Button variant="none"><Link to="">Delete Workout</Link></Button></td>
+                                            <DeleteWorkout afterDeleteHandler={afterDeleteHandler} workoutid={plan._id} id={id} /> </td>
                                         </tr>
                                     )
                                 })
