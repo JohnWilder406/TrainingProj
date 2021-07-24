@@ -62,8 +62,6 @@ const Main = (props) => {
     const [workout, setWorkout] = useState({});
     const [newWorkout, setNewWorkout] = useState({});
 
-    console.log(id)
-
     // workout set function
     function today(arr) {
         let newObj = {}

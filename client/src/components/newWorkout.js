@@ -8,6 +8,7 @@ const NewWorkout = (props) => {
     const [user, setUser] = useState([]);
     const [training, setTraining] = useState([]);
     const [newWorkout, setNewWorkout] = useState({});
+    const [userWorkout, setUserWorkout] = useState({});
     const [startdate, setStartdate] = useState();
     const {id} = props;
 
@@ -34,9 +35,10 @@ const NewWorkout = (props) => {
     }, []);
     
     //this function adds the newWork out to the input field of the form.
-    const addNew = (name, duration, intensity, difficulty, frequency, startdate) => { 
+    const addNew = (name, complete, duration, intensity, difficulty, frequency, startdate) => { 
         setNewWorkout({ 
-            name: name, 
+            name: name,
+            complete: false, 
             duration: duration, 
             intensity: intensity, 
             difficulty: difficulty, 
@@ -51,23 +53,22 @@ const NewWorkout = (props) => {
 
         let newObject={...newWorkout}
         newObject.startdate = startdate
-        setNewWorkout(newObject);
-
-        console.log(newWorkout);
-        console.log(startdate);
+        setUserWorkout(newObject);
     } 
     
     //adds the newWorkout to the users workouts array.
     useEffect(() => {
-        console.log(newWorkout)
-        axios.put('http://localhost:8000/api/users/' + id + '/add', {workout: newWorkout})
+        console.log(userWorkout)
+        axios.put('http://localhost:8000/api/users/' + id + '/add', {workout: userWorkout})
         .then((res) => {
             console.log(res);
+            //adding navigate here make the page immediately revert back to main the moment you click on add new workout in the navbar.
+            // navigate('/main')
         })
         .catch((err) => {
             console.log(err);
-        })
-    }, [newWorkout])
+        });
+    }, [userWorkout]);
     
 
     
@@ -85,6 +86,7 @@ const NewWorkout = (props) => {
                             </Form.Group>
 
                             <Form.Group as={Col} className="col-4">
+                                {/* when selecting the date, it is being selected but the input is not changing */}
                                 <Form.Control type="date" name="startdate" value={newWorkout.startdate ? newWorkout.startdate : ""} onChange={(e) => setStartdate(e.target.value)}/>
                                 <Form.Label>Starting Date</Form.Label>
                             </Form.Group>
@@ -126,7 +128,8 @@ const NewWorkout = (props) => {
                                                     <td>{workouts.frequency}</td>
                                                     <td>
                                                         <Button onClick={(e) => addNew(
-                                                            workouts.name, 
+                                                            workouts.name,
+                                                            workouts.complete, 
                                                             workouts.duration, 
                                                             workouts.intensity, 
                                                             workouts.difficulty, 
