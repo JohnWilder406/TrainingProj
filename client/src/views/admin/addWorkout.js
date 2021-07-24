@@ -41,7 +41,7 @@ const AddWorkout = (props) => {
                     <Button variant="outline-dark"><Link to="/admin/main">Main Page</Link></Button>
                 </Nav>
             </Navbar>
-            <WorkoutForm object={workout} setObject={setWorkout} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Workout"}/>
+            <WorkoutForm linkid={id} object={workout} setObject={setWorkout} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Workout"}/>
         </Container>
     )
 }

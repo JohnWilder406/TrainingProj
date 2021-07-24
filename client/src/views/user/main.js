@@ -2,14 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Button } from  'react-bootstrap';
-import Navbar from '../../components/Navbar';
+import Navigation from '../../components/Navbar';
 import {LoginContext} from '../../context/context';
 import moment from 'moment';
 import CalendarComp from '../../components/user/calendar';
 import randomNum from '../../helpers/random';
 import mapper from '../../helpers/mapper';
 import addDays from '../../helpers/adding';
-import Logout from '../../components/Logout';
+
 
 
 const Main = (props) => {
@@ -102,7 +102,7 @@ const Main = (props) => {
     return (
         <div>
             <h1>User Main Page</h1>
-            <Navbar />
+            <Navigation search={false}/>
             <Container>
                 <h5 align="center">{date}</h5>
                 <blockquote className="blockquote">

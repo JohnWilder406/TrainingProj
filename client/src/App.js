@@ -13,7 +13,6 @@ import EditTraining from './views/admin/editTraining';
 import EditWorkout from './views/admin/editWorkout';
 import Main from './views/user/main';
 import Profile from './views/user/profile';
-import UserProgress from './views/admin/userProgress';
 import {Redirect, Router} from '@reach/router'
 import Wrapper from './components/wrapper';
 import UserList from './components/admin/userList';
@@ -53,11 +52,10 @@ function App() {
             <EditTraining path="/admin/:id/editplan" />
             <AddWorkout path="/admin/training/:id/addworkout" />
             <EditWorkout path="/admin/training/:id/editworkout" />
-            <UserProgress path="/admin/userprogress" />
             <UserList path="/admin/userlist" />
             </>
           ) : (
-            <Redirect from="/admin" to="/" />
+            <Redirect from="/admin" to="/" noThrow/>
           )
         }
       </Router>

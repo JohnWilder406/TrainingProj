@@ -10,6 +10,7 @@ const AdminMain = (props) => {
     const [plans, setPlans] = useState([]);
     const [plansDefault, setPlansDefault] = useState([]);
     const [searchQuery, setSearchQuery] = useState();
+    
 
     //retrieves all training plans
     useEffect(() => {
@@ -49,12 +50,13 @@ const AdminMain = (props) => {
         <Container className="mainContainer">
         <h1>Admin Main page </h1>
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand>Crusher Training App</Navbar.Brand>
+                <Navbar.Brand>Crusher Training Admin Portal</Navbar.Brand>
                 <Nav className="mr-auto">
+                    <Button variant="outline-dark"><Link to="/admin/main">Home</Link></Button>
                     <Button variant="outline-dark"><Link to="/admin/addplan">New Training Plan</Link></Button>
-                    <Button variant="outline-dark"><Link to="/admin/userprogress">User Progress</Link></Button>
+                    <Button variant="outline-dark"><Link to="/admin/userlist">User Management</Link></Button>
                 </Nav>
-                <Logout />
+                <Logout admin={true}/>
                 <Search searchQuery={searchQuery} onChange={updateInput} />
             </Navbar>
             <Card className="modularForm">

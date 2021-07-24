@@ -42,7 +42,7 @@ const AddTraining = (props) => {
                     <Button variant="outline-dark"><Link to="/admin/main">Main Page</Link></Button>
                 </Nav>
             </Navbar>
-            <ModularForm object={plan} setObject={setPlan} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Plan"} />
+            <ModularForm edit={false} object={plan} setObject={setPlan} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Plan"} />
         </Container>
     )
 }
