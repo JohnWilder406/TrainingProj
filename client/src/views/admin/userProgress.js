@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Navbar, Nav, Table, Button } from  'react-bootstrap';
-import Search from '../components/Search';
+import Search from '../../components/Search';
 
 function calc(num) {
     let result;

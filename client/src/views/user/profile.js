@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, FormGroup, FormLabel, Row, Col, Button } from  'react-bootstrap';
-import Navbar from '../components/Navbar';
-import {LoginContext} from '../context/context';
+import Navbar from '../../components/Navbar';
+import {LoginContext} from '../../context/context';
 
 const Profile = (props) => {
     const {id, setId} = useContext(LoginContext);

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Table, Button, Nav, Navbar } from  'react-bootstrap';
-import Search from './Search';
-import DeleteButton from './DeleteButton';
+import Search from '../Search'
+import DeleteButton from '../DeleteButton';
 
 const UserList = (props) => {
     const [userList, setUserList] = useState([]);
