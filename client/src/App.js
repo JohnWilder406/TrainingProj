@@ -1,22 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import React, { useState, useEffect } from 'react';
-import AdminLogin from './components/adminlogin';
-import Login from './components/login';
-import NewWorkout from './components/newWorkout';
-import Register from './components/register';
-import AddTraining from './views/addTraining';
-import AddWorkout from './views/addWorkout';
-import AdminMain from './views/adminMain';
-import CalendarComp from './views/calendar';
-import EditTraining from './views/editTraining';
-import EditWorkout from './views/editWorkout';
-import Main from './views/main';
-import Profile from './views/profile';
-import UserProgress from './views/userProgress';
+import React, { useState } from 'react';
+import AdminLogin from './components/admin/adminlogin';
+import Login from './components/user/login';
+import NewWorkout from './components/user/newWorkout';
+import Register from './components/user/register';
+import AddTraining from './views/admin/addTraining';
+import AddWorkout from './views/admin/addWorkout';
+import AdminMain from './views/admin/adminMain';
+import CalendarComp from './components/user/calendar';
+import EditTraining from './views/admin/editTraining';
+import EditWorkout from './views/admin/editWorkout';
+import Main from './views/user/main';
+import Profile from './views/user/profile';
 import {Redirect, Router} from '@reach/router'
 import Wrapper from './components/wrapper';
-import UserList from './components/userList';
+import UserList from './components/admin/userList';
 
 
 function App() {
@@ -53,11 +52,10 @@ function App() {
             <EditTraining path="/admin/:id/editplan" />
             <AddWorkout path="/admin/training/:id/addworkout" />
             <EditWorkout path="/admin/training/:id/editworkout" />
-            <UserProgress path="/admin/userprogress" />
             <UserList path="/admin/userlist" />
             </>
           ) : (
-            <Redirect from="/admin" to="/" />
+            <Redirect from="/admin" to="/" noThrow/>
           )
         }
       </Router>

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Navbar, Nav, Button } from  'react-bootstrap';
-import WorkoutForm from '../components/workoutform';
+import { Container, Navbar, Nav, Button } from  'react-bootstrap';
+import WorkoutForm from '../../components/admin/workoutform';
 
 const AddWorkout = (props) => {
     const {id} = props;
@@ -41,7 +41,7 @@ const AddWorkout = (props) => {
                     <Button variant="outline-dark"><Link to="/admin/main">Main Page</Link></Button>
                 </Nav>
             </Navbar>
-            <WorkoutForm object={workout} setObject={setWorkout} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Workout"}/>
+            <WorkoutForm linkid={id} object={workout} setObject={setWorkout} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Workout"}/>
         </Container>
     )
 }

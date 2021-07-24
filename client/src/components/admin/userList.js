@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Table, Button, Nav, Navbar } from  'react-bootstrap';
-import Search from './Search';
-import DeleteButton from './DeleteButton';
+import {Link} from '@reach/router';
+import { Container, Card, Table, Button, Nav, Navbar } from  'react-bootstrap';
+import Search from '../Search'
+import DeleteButton from '../DeleteButton';
+import Logout from '../Logout';
 
-const UserList = (props) => {
+const UserList = () => {
     const [userList, setUserList] = useState([]);
     const [userDefault, setUserDefault] = useState([]);
     const [searchQuery, setSearchQuery] = useState();
@@ -64,11 +65,13 @@ const UserList = (props) => {
         <Container>
         <h1>User List page</h1>
         <Navbar bg="dark" variant="dark">
-                <Navbar.Brand>Crusher Training App</Navbar.Brand>
+                <Navbar.Brand>Crusher Training Admin Portal</Navbar.Brand>
                 <Nav className="mr-auto">
+                    <Button variant="outline-dark"><Link to="/admin/main">Home</Link></Button>
                     <Button variant="outline-dark"><Link to="/admin/addplan">New Training Plan</Link></Button>
-                    <Button variant="outline-dark"><Link to="">User Progress</Link></Button>
+                    <Button variant="outline-dark"><Link to="/admin/userlist">User Management</Link></Button>
                 </Nav>
+                <Logout admin={true}/>
                 <Search searchQuery={searchQuery} onChange={updateInput} />
             </Navbar>
         <Card className="modularForm">
@@ -94,7 +97,6 @@ const UserList = (props) => {
                     </Table>
                 </Card.Body>
             </Card>
-
         </Container>
         
     )

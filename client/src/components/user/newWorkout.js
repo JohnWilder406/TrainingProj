@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Button, Table } from  'react-bootstrap';
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 
 const NewWorkout = (props) => {
     const [user, setUser] = useState([]);

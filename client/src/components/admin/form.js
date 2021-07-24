@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Button } from  'react-bootstrap';
+import React from 'react';
+import {navigate} from '@reach/router';
+import { Card, Form, Row, Col, Button } from  'react-bootstrap';
 
 const ModularForm = (props) => {
-    const {object, setObject, errors, handleSubmit, submitLabel} = props
+    const {object, setObject, errors, handleSubmit, submitLabel, edit, linkid} = props
 
 
     //input function to load changes into form for submission.
@@ -80,9 +79,17 @@ const ModularForm = (props) => {
                         </Col>
                     </Form.Group>
                 <Form.Group as={Row}>
-                <Col sm={{span: 1, offset: 5}}>
+                    {
+                        edit ? <><Col sm={{span: 1, offset: 4}}>
                 <Button variant="dark" style={{width: "150px"}} type="submit">{submitLabel}</Button>
                 </Col>
+                <Col sm={{span: 1, offset: 1}}>
+                <Button variant="dark" style={{width: "150px"}} onClick={(e) => navigate('/admin/training/' + linkid + '/addworkout')}>Add Workout</Button>
+                </Col></> : <><Col sm={{span: 1, offset: 5}}>
+                <Button variant="dark" style={{width: "150px"}} type="submit">{submitLabel}</Button>
+                </Col></>
+
+                    }
                 </Form.Group>
             </Form>
         </Card.Body>

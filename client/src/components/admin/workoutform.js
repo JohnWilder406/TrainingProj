@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Button } from  'react-bootstrap';
+import React from 'react';
+import {navigate} from '@reach/router';
+import { Card, Form, Row, Col, Button } from  'react-bootstrap';
 
 const WorkoutForm = (props) => {
-    const {object, setObject, errors, handleSubmit, submitLabel} = props
+    const {object, setObject, errors, handleSubmit, submitLabel, linkid} = props
 
 
     //input function to load changes into form for submission.
@@ -29,7 +28,7 @@ const WorkoutForm = (props) => {
                             <Form.Control
                                 type="text"
                                 name="name"
-                                value={object.name}
+                                value={object.name ? object.name : ""}
                                 onChange={(e) => inputChange(e)} />
                             {
                                 errors.name ? <span className="error">{errors.name.message}</span> : null
@@ -44,7 +43,7 @@ const WorkoutForm = (props) => {
                             <Form.Control
                                 as="select"
                                 name="duration"
-                                value={object.duration}
+                                value={object.duration ? object.duration : ""}
                                 onChange={(e) => inputChange(e)}>
                                 <option>Select Duration</option>
                                 <option value="30">30 minutes</option>
@@ -66,7 +65,7 @@ const WorkoutForm = (props) => {
                             <Form.Control
                                 as="select"
                                 name="difficulty"
-                                value={object.difficulty}
+                                value={object.difficulty ? object.difficulty : ""}
                                 onChange={(e) => inputChange(e)}>
                                 <option>Select Difficulty</option>
                                 <option value="easy">Easy</option>
@@ -87,7 +86,7 @@ const WorkoutForm = (props) => {
                             <Form.Control
                                 as="select"
                                 name="intensity"
-                                value={object.intensity}
+                                value={object.intensity ? object.intensity : ""}
                                 onChange={(e) => inputChange(e)}>
                                 <option>Select Difficulty</option>
                                 <option value="low">Low</option>
@@ -107,7 +106,7 @@ const WorkoutForm = (props) => {
                             <Form.Control
                                 as="select"
                                 name="frequency"
-                                value={object.frequency}
+                                value={object.frequency ? object.frequency : ""}
                                 onChange={(e) => inputChange(e)}>
                                 <option>Select Duration</option>
                                 <option value="1">Once a week</option>
@@ -122,8 +121,11 @@ const WorkoutForm = (props) => {
                         </Col>
                     </Form.Group>
                 <Form.Group as={Row}>
-                <Col sm={{span: 1, offset: 5}}>
+                <Col sm={{span: 1, offset: 4}}>
                 <Button variant="dark" style={{width: "150px"}} type="submit">{submitLabel}</Button>
+                </Col>
+                <Col sm={{span: 1, offset: 1}}>
+                <Button variant="dark" style={{width: "150px"}} onClick={(e) => navigate("/admin/" + linkid + "/editplan")}>Cancel</Button>
                 </Col>
                 </Form.Group>
             </Form>

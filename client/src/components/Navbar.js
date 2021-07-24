@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Button, Nav, Navbar} from  'react-bootstrap';
+import React, { useContext } from 'react';
+import {navigate} from '@reach/router';
+import { Button, Nav, Navbar} from  'react-bootstrap';
 import Search from './Search';
 import {LoginContext} from '../context/context';
+import Logout from './Logout';
 
 const Navigation = (props) => {
     const {id} = useContext(LoginContext);
-    //Need to add functionality for Search.   
+    const {search, admin} = props  
     
 
     return (
@@ -19,7 +19,10 @@ const Navigation = (props) => {
                     <Button className="btn btn-link" variant="outline-dark" onClick={(e) => navigate('/users/' + id + '/newworkout')}>New Workout</Button>
                     <Button className="btn btn-link" variant="outline-dark" onClick={(e) => navigate('/users/' + id + '/profile')}>Edit Profile</Button>
                 </Nav>
-                <Search  />
+                <Logout admin={admin}/>
+                {
+                    search ? <Search /> : <span></span>
+                }
             </Navbar>
         </div>
     )

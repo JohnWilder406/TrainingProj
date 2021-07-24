@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Table, Button, Form, Row, Col, Navbar, Nav } from  'react-bootstrap';
-import ModularForm from '../components/form';
-import Search from '../components/Search';
+import {Link} from '@reach/router';
+import { Container, Card, Table, Button, Navbar, Nav } from  'react-bootstrap';
+import ModularForm from '../../components/admin/form';
+import Search from '../../components/Search';
+import DeleteWorkout from '../../components/admin/deleteWorkout';
 
 const EditTraining = (props) => {
     const {id} = props;
@@ -21,7 +22,7 @@ const EditTraining = (props) => {
                 setWorkouts(res.data.workouts)
                 setWorkDefault(res.data.workouts)
             })
-    }, [])
+    }, [id])
 
     //search filter
     const updateInput = async (searchQuery) => {
@@ -33,6 +34,14 @@ const EditTraining = (props) => {
         })
         setSearchQuery(searchQuery);
         setWorkouts(filtered)
+    }
+
+    const afterDeleteHandler = (deletedPlanId) => {
+        let filteredWorkoutArray = workouts.filter((workout) => {
+            return workout._id !== deletedPlanId
+        })
+
+        setWorkouts(filteredWorkoutArray)
     }
 
 
@@ -55,14 +64,15 @@ const EditTraining = (props) => {
         <Container>
             <h1>Edit Training page</h1>
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand>Crusher Training App</Navbar.Brand>
+                <Navbar.Brand>Crusher Training Admin Portal</Navbar.Brand>
                 <Nav className="mr-auto">
+                    <Button variant="outline-dark"><Link to="/admin/main">Home</Link></Button>
                     <Button variant="outline-dark"><Link to="/admin/addplan">New Training Plan</Link></Button>
-                    <Button variant="outline-dark"><Link to="/admin/main">Main Page</Link></Button>
+                    <Button variant="outline-dark"><Link to="/admin/userlist">User Management</Link></Button>
                 </Nav>
                 <Search searchQuery={searchQuery} onChange={updateInput} />
             </Navbar>
-            <ModularForm object={plan} setObject={setPlan} errors={errors} handleSubmit={handleSubmit} submitLabel={"Edit Plan"}/>
+            <ModularForm linkid={id} edit={true} object={plan} setObject={setPlan} errors={errors} handleSubmit={handleSubmit} submitLabel={"Edit Plan"}/>
             <Card className="modularForm">
                 <Card.Body>
                     <Table bordered striped hover>
@@ -87,7 +97,7 @@ const EditTraining = (props) => {
                                             <td>{plan.difficulty}</td>
                                             <td>{plan.frequency}</td>
                                             <td><Button variant="none"><Link to={"/admin/training/" + plan._id + "/editworkout"} state={{trainingid: id}}>Edit Workout</Link></Button>
-                                            <Button variant="none"><Link to={'/admin/training/' + id + '/addworkout'}>Add Workout</Link></Button></td>
+                                            <DeleteWorkout afterDeleteHandler={afterDeleteHandler} workoutid={plan._id} id={id} /> </td>
                                         </tr>
                                     )
                                 })

@@ -1,53 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Button } from  'react-bootstrap';
-import Navbar from '../components/Navbar';
-import {LoginContext} from '../context/context';
+import { Container, Form, Row, Col, Button } from  'react-bootstrap';
+import Navigation from '../../components/Navbar';
+import {LoginContext} from '../../context/context';
 import moment from 'moment';
-import CalendarComp from './calendar';
-
-//random number generator for api call for quote 
-function randomNum() {
-    let num = Math.floor(Math.random()*1644)
-
-    return num
-}
-
-// events list mapping function for calendar
-function mapper(arr) {
-    let newArr = []
-    for (var i = 0; i < arr.length; i++) {
-        let obj = {start: moment(arr[i].startdate), end: moment(arr[i].startdate), title: arr[i].name}
-        newArr.push(obj)
-    }
-
-    return newArr
-}
-
-// date adding function 
-function addDays(date, freq) {
-    let days = 0
-    if (freq === 1) {
-        days = 7
-    } else if(freq === 2) {
-        days = 3
-    } else if(freq === 3) {
-        days = 2
-    } else if(freq === 4) {
-        days = 2
-    } else if(freq === 7) {
-        days = 1
-    } else {
-        days = 1000
-    }
-    var result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result
-}
+import CalendarComp from '../../components/user/calendar';
+import randomNum from '../../helpers/random';
+import mapper from '../../helpers/mapper';
+import addDays from '../../helpers/adding';
 
 
-const Main = (props) => {
+
+const Main = () => {
     const {id} = useContext(LoginContext);
     var date = new Date().toDateString();
     const [user, setUser] = useState();
@@ -135,7 +99,7 @@ const Main = (props) => {
     return (
         <div>
             <h1>User Main Page</h1>
-            <Navbar />
+            <Navigation search={false}/>
             <Container>
                 <h5 align="center">{date}</h5>
                 <blockquote className="blockquote">
@@ -145,7 +109,7 @@ const Main = (props) => {
             <Container as={Row}>
                 <div className=" col-4 panel">
                     <div className="panel-heading">
-                    <h3 className="panel-title">Work Out Details</h3>
+                    <h3 className="panel-title">Workout Details</h3>
                     </div>
                     <Form onSubmit={(e) => {workoutComplete(e)}}>
                         <Form.Group as={Row} className="mb-3">

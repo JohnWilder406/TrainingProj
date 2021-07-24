@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Navbar, Nav, Button } from  'react-bootstrap';
-import WorkoutForm from '../components/workoutform';
+import {Link} from '@reach/router';
+import { Container, Navbar, Nav, Button } from  'react-bootstrap';
+import WorkoutForm from '../../components/admin/workoutform';
 
 const EditWorkout = (props) => {
     const {id, location} = props;
@@ -22,7 +22,7 @@ const EditWorkout = (props) => {
                 }
             }
         })
-    }, [])
+    }, [training, id])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,6 +37,7 @@ const EditWorkout = (props) => {
                 console.log(err)
             })
     }
+
     return (
         <Container>
         <h1>Edit Workout Plan Page (admin)</h1>
@@ -46,7 +47,7 @@ const EditWorkout = (props) => {
                 <Button variant="outline-dark"><Link to="/admin/main">Main Page</Link></Button>
             </Nav>
         </Navbar>
-        <WorkoutForm object={workout} setObject={setWorkout} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Workout"}/>
+        <WorkoutForm linkid={training} object={workout} setObject={setWorkout} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Workout"}/>
     </Container>
     )
 }

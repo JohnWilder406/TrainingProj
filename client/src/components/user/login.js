@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import {Card, Form, Button, Row, Col, Container, Modal} from 'react-bootstrap';
 import axios from 'axios'
 import { Link, navigate } from '@reach/router';
-import { LoginContext } from '../context/context';  
+import { LoginContext } from '../../context/context';  
 
 
 const Login = (props) => {
@@ -12,7 +12,6 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [show, setShow] = useState(false);
-    const [errors, setErrors] = useState({});
 
     //modal close function for error popup
     const handleClose = () => setShow(false);
@@ -35,8 +34,8 @@ const Login = (props) => {
             navigate("/main");            
         })
         .catch(err => {
-            console.log(err);
-            // setErrorMessage(err.response);
+            console.log(err.response.data.message);
+            setErrorMessage(err.response.data.message);
             setShow(true);
         });
     }
@@ -64,6 +63,7 @@ const Login = (props) => {
         </Form>
         </Card.Body>
         <Link style={{margin: 'auto'}} to="/register">Not registered? Click here.</Link>
+        <Link style={{margin: 'auto'}} to="/admin">Admin? Click here.</Link>
     </Card>
 
     {/* The animation = false removes an error for the findDOMNode depreciated warning.  */}

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, FormGroup, FormLabel, Row, Col, Button } from  'react-bootstrap';
-import Navbar from '../components/Navbar';
-import {LoginContext} from '../context/context';
+import {navigate} from '@reach/router';
+import { Container, Card, Form, Row, Col, Button } from  'react-bootstrap';
+import Navbar from '../../components/Navbar';
+import {LoginContext} from '../../context/context';
 
 const Profile = (props) => {
     const {id, setId} = useContext(LoginContext);
@@ -40,7 +40,7 @@ const Profile = (props) => {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [idx]);
 
     //updates user data in db
     const updateProfile = (e) => {
@@ -72,7 +72,7 @@ const Profile = (props) => {
     return (
         <Container>
             <h1>Profile page</h1>
-            <Navbar />
+            <Navbar search={false}/>
             <Card border="dark" className="text-center">
                 <Card.Header style={{textAlign: "center", fontSize: "24px"}}>Edit Profile</Card.Header>
                 <Card.Body>

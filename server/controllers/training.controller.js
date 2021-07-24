@@ -62,3 +62,15 @@ module.exports.updateWorkout = (req, res) => {
         .then(updatedWorkout => res.json(updatedWorkout))
         .catch(err => res.json(err))
 }
+
+module.exports.deleteWorkout = (req, res) => {
+    Training.findByIdAndUpdate(
+        req.params.id, {
+            $pull: {
+                "workouts": {_id: req.params.workoutid}
+            }
+        }, {safe: true, upsert: true},
+    )
+        .then(updatedPlan => res.json(updatedPlan))
+        .catch(err => res.json(err))
+}
