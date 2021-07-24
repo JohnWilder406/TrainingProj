@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Nav, Navbar, Button } from  'react-bootstrap';
+import { Container, Nav, Navbar, Button } from  'react-bootstrap';
 import ModularForm from '../../components/admin/form';
 
 
 
-const AddTraining = (props) => {
+const AddTraining = () => {
     const [errors, setErrors] = useState({})
     const [plan, setPlan] = useState({
         name: "",

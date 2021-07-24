@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Button } from  'react-bootstrap';
+import { Container, Form, Row, Col, Button } from  'react-bootstrap';
 import Navigation from '../../components/Navbar';
 import {LoginContext} from '../../context/context';
 import moment from 'moment';
@@ -12,7 +11,7 @@ import addDays from '../../helpers/adding';
 
 
 
-const Main = (props) => {
+const Main = () => {
     const {id} = useContext(LoginContext);
     var date = new Date().toDateString();
     const [user, setUser] = useState();
@@ -112,7 +111,7 @@ const Main = (props) => {
             <Container as={Row}>
                 <div className=" col-4 panel">
                     <div className="panel-heading">
-                    <h3 className="panel-title">Work Out Details</h3>
+                    <h3 className="panel-title">Workout Details</h3>
                     </div>
                     <Form onSubmit={(e) => {workoutComplete(e)}}>
                         <Form.Group as={Row} className="mb-3">

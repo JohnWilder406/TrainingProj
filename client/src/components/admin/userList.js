@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Table, Button, Nav, Navbar } from  'react-bootstrap';
+import {Link} from '@reach/router';
+import { Container, Card, Table, Button, Nav, Navbar } from  'react-bootstrap';
 import Search from '../Search'
 import DeleteButton from '../DeleteButton';
 import Logout from '../Logout';
 
-const UserList = (props) => {
+const UserList = () => {
     const [userList, setUserList] = useState([]);
     const [userDefault, setUserDefault] = useState([]);
     const [searchQuery, setSearchQuery] = useState();

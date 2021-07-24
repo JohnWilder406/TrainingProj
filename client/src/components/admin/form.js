@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Button } from  'react-bootstrap';
+import React from 'react';
+import {navigate} from '@reach/router';
+import { Card, Form, Row, Col, Button } from  'react-bootstrap';
 
 const ModularForm = (props) => {
     const {object, setObject, errors, handleSubmit, submitLabel, edit, linkid} = props

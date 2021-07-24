@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Table, Navbar, Nav, Button } from  'react-bootstrap';
+import {Link} from '@reach/router';
+import { Container, Card, Table, Navbar, Nav, Button } from  'react-bootstrap';
 import Search from '../../components/Search';
 import Logout from '../../components/Logout';
 import DeleteButton from '../../components/DeleteButton';
 
-const AdminMain = (props) => {
+const AdminMain = () => {
     const [plans, setPlans] = useState([]);
     const [plansDefault, setPlansDefault] = useState([]);
     const [searchQuery, setSearchQuery] = useState();

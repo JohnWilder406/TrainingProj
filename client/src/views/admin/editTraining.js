@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Table, Button, Form, Row, Col, Navbar, Nav } from  'react-bootstrap';
+import {Link} from '@reach/router';
+import { Container, Card, Table, Button, Navbar, Nav } from  'react-bootstrap';
 import ModularForm from '../../components/admin/form';
 import Search from '../../components/Search';
 import DeleteWorkout from '../../components/admin/deleteWorkout';
@@ -22,7 +22,7 @@ const EditTraining = (props) => {
                 setWorkouts(res.data.workouts)
                 setWorkDefault(res.data.workouts)
             })
-    }, [])
+    }, [id])
 
     //search filter
     const updateInput = async (searchQuery) => {

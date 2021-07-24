@@ -12,7 +12,6 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [show, setShow] = useState(false);
-    const [errors, setErrors] = useState({});
 
     //modal close function for error popup
     const handleClose = () => setShow(false);

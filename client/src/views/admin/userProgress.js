@@ -4,6 +4,9 @@ import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Navbar, Nav, Table, Button } from  'react-bootstrap';
 import Search from '../../components/Search';
 
+
+//incomplete component- do not link to.
+
 function calc(num) {
     let result;
     //duration of plan (# of days)

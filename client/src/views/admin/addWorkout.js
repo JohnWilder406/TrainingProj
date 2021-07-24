@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Navbar, Nav, Button } from  'react-bootstrap';
+import { Container, Navbar, Nav, Button } from  'react-bootstrap';
 import WorkoutForm from '../../components/admin/workoutform';
 
 const AddWorkout = (props) => {

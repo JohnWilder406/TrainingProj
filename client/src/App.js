@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AdminLogin from './components/admin/adminlogin';
 import Login from './components/user/login';
 import NewWorkout from './components/user/newWorkout';
