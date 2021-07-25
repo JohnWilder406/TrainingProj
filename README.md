@@ -19,7 +19,7 @@ User Portal:
   - CRUD Operations for Admins 
   - Admins can view User List and make other users admins or delete users
   - Admins can add, edit, or delete training plans
-  - Admins can add or edit workouts in invididual training plans
+  - Admins can add, edit, or delete workouts in invididual training plans
   
   
  Featured technologies:
