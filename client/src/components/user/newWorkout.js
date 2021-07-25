@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Button, Table } from  'react-bootstrap';
 import Navbar from '../Navbar';
 
 const NewWorkout = (props) => {
-    const [user, setUser] = useState([]);
+    //const [user, setUser] = useState({});
     const [training, setTraining] = useState([]);
-    const [workout, setWorkout] = useState([]);
+    const [newWorkout, setNewWorkout] = useState({});
+    const [userWorkout, setUserWorkout] = useState({});
+    const [startdate, setStartdate] = useState();
+    const workoutRef = useRef(userWorkout);
     const {id} = props;
 
+    //gets training plans for mapping over
     useEffect(() => {
         axios.get('http://localhost:8000/api/plans')
             .then((res) => {
@@ -20,37 +24,76 @@ const NewWorkout = (props) => {
                 console.log(err);
             })
     }, []);
+    
+    //this function adds the newWork out to the input field of the form.
+    const addNew = (name, complete, duration, intensity, difficulty, frequency, startdate) => { 
+        setNewWorkout({ 
+            name: name,
+            complete: false, 
+            duration: duration, 
+            intensity: intensity, 
+            difficulty: difficulty, 
+            frequency: frequency,
+            startdate: ""
+        });
+    }
 
+    //Sets the start date
+    const addCalendar = (e, startdate ) => {
+        e.preventDefault();
+
+        let newObject = {...newWorkout}
+        newObject.startdate = startdate
+        setUserWorkout(newObject);
+    } 
+    
+    //adds the newWorkout to the users workouts array.
     useEffect(() => {
-        axios.get('http://localhost:8000/api/user/get/' + id)
-            .then((res) => {
-                console.log(res);
-                setUser(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, []);
+        if(userWorkout !== workoutRef.current) {
+            axios.put('http://localhost:8000/api/users/' + id + '/add', {workout: userWorkout})
+                .then((res) => {
+                    console.log(res)
+                    navigate('/main')
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+            
+        } else {
+            console.log(userWorkout);
+        }
+
+    }, [userWorkout]);
     
     return (
         <Container>
             <h1>New Workout (user)</h1>
-            <Navbar />
+            <Navbar search={true}/>
             <Card border="dark" className="text-center">
                 <Card.Body>
                     <Form>
                         <Row className="mb-3">
                             <Form.Group as={Col} className="col-4">
-                                <Form.Control type="text" name="workoutName" placeholder="Workout Name"/>
+                                <Form.Control 
+                                    type="text" 
+                                    name="name" 
+                                    placeholder="Workout Name" 
+                                    value={newWorkout.name ? newWorkout.name : ""}
+                                />
                             </Form.Group>
 
                             <Form.Group as={Col} className="col-4">
-                                <Form.Control type="date" name="startDate"/>
+                                <Form.Control 
+                                    type="date" 
+                                    name="startdate" 
+                                    value={startdate} 
+                                    onChange={(e) => setStartdate(e.target.value)}
+                                />
                                 <Form.Label>Starting Date</Form.Label>
                             </Form.Group>
 
                             <Form.Group as={Col} className="col-4">
-                                <Button>Add to Calendar</Button>
+                                <Button onClick={(e) => addCalendar(e, startdate)}>Add to Calendar</Button>
                             </Form.Group> 
                         </Row>
                     </Form>
@@ -70,6 +113,7 @@ const NewWorkout = (props) => {
                         </tr>
                     </thead>
                     {/* Currently this is pulling all plans from db. So if there is more than one it would likely populate with other works */}
+
                     {
                         training.map((plan, index) => {
                             return (
@@ -83,7 +127,17 @@ const NewWorkout = (props) => {
                                                     <td>{workouts.intensity}</td>
                                                     <td>{workouts.difficulty}</td>
                                                     <td>{workouts.frequency}</td>
-                                                    <td>Add</td>
+                                                    <td>
+                                                        <Button onClick={(e) => addNew(
+                                                            workouts.name,
+                                                            workouts.complete, 
+                                                            workouts.duration, 
+                                                            workouts.intensity, 
+                                                            workouts.difficulty, 
+                                                            workouts.frequency
+                                                            )}>Add
+                                                        </Button>
+                                                        </td>
                                                 </tr>
                                             )
                                         })
