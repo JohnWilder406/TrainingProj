@@ -1,33 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
 import { Container, Card, Form, Row, Col, Button, Table } from  'react-bootstrap';
 import Navbar from '../Navbar';
 
 const NewWorkout = (props) => {
-    const [user, setUser] = useState([]);
+    //const [user, setUser] = useState({});
     const [training, setTraining] = useState([]);
     const [newWorkout, setNewWorkout] = useState({});
     const [userWorkout, setUserWorkout] = useState({});
     const [startdate, setStartdate] = useState();
+    const workoutRef = useRef(userWorkout);
     const {id} = props;
 
+    //gets training plans for mapping over
     useEffect(() => {
         axios.get('http://localhost:8000/api/plans')
             .then((res) => {
                 console.log(res);
                 setTraining(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, []);
-
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/user/get/' + id)
-            .then((res) => {
-                console.log(res);
-                setUser(res.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -51,27 +42,28 @@ const NewWorkout = (props) => {
     const addCalendar = (e, startdate ) => {
         e.preventDefault();
 
-        let newObject={...newWorkout}
+        let newObject = {...newWorkout}
         newObject.startdate = startdate
         setUserWorkout(newObject);
     } 
     
     //adds the newWorkout to the users workouts array.
     useEffect(() => {
-        console.log(userWorkout)
-        axios.put('http://localhost:8000/api/users/' + id + '/add', {workout: userWorkout})
-        .then((res) => {
-            console.log(res);
-            //adding navigate here make the page immediately revert back to main the moment you click on add new workout in the navbar.
-            // navigate('/main')
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-    }, [userWorkout]);
-    
+        if(userWorkout !== workoutRef.current) {
+            axios.put('http://localhost:8000/api/users/' + id + '/add', {workout: userWorkout})
+                .then((res) => {
+                    console.log(res)
+                    navigate('/main')
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+            
+        } else {
+            console.log(userWorkout);
+        }
 
-    
+    }, [userWorkout]);
     
     return (
         <Container>
@@ -82,12 +74,21 @@ const NewWorkout = (props) => {
                     <Form>
                         <Row className="mb-3">
                             <Form.Group as={Col} className="col-4">
-                                <Form.Control type="text" name="name" placeholder="Workout Name" value={newWorkout.name ? newWorkout.name : ""}/>
+                                <Form.Control 
+                                    type="text" 
+                                    name="name" 
+                                    placeholder="Workout Name" 
+                                    value={newWorkout.name ? newWorkout.name : ""}
+                                />
                             </Form.Group>
 
                             <Form.Group as={Col} className="col-4">
-                                {/* when selecting the date, it is being selected but the input is not changing */}
-                                <Form.Control type="date" name="startdate" value={newWorkout.startdate ? newWorkout.startdate : ""} onChange={(e) => setStartdate(e.target.value)}/>
+                                <Form.Control 
+                                    type="date" 
+                                    name="startdate" 
+                                    value={startdate} 
+                                    onChange={(e) => setStartdate(e.target.value)}
+                                />
                                 <Form.Label>Starting Date</Form.Label>
                             </Form.Group>
 
