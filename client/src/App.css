@@ -28,6 +28,47 @@ input {
   background-color: #014268;
 }
 
+.cancel_btn {
+  background-color: #6E7275;
+}
+
+.search {
+  background-color: #00060A;
+  color: #D8E3EA;
+  padding: 10px;
+  margin: 5px;
+}
+
+table {
+  width: 100%;
+  margin: 20px 0px 10px 0px;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 12px;
+  color: #D8E3EA;
+  background-color: #00060A;
+  font-family: serif;
+}
+
+td, th {
+  padding: 10px;
+  border: 2px solid #D8E3EA;
+}
+
+tr:nth-child(odd) {
+  background-color: #28536C;
+}
+
+tr:nth-child(even) {
+  background-color: #013F64;
+}
+
+td {
+  color: #D8E3EA;
+}
+
 .bodys {
   background-color: #D8E3EA;
   color: black;
