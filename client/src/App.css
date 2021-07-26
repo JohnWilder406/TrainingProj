@@ -1,7 +1,36 @@
 html, body, body > div, .app {
   height: 100%;
   width: 100%;
-  background-color: rgb(201, 196, 196);
+}
+
+.panel-heading {
+  background-color: #013F64;
+}
+
+.panel-title {
+  color:#D8E3EA;
+}
+
+.headers {
+  background-color: #014268;
+  color: white;
+}
+
+.quotes {
+  background-color: #6E7275;
+}
+
+input {
+  margin: 5px;
+}
+
+.submit_btn {
+  background-color: #014268;
+}
+
+.bodys {
+  background-color: #D8E3EA;
+  color: black;
 }
 
 .error {
@@ -11,13 +40,13 @@ html, body, body > div, .app {
 .loginContainer {
   margin: 0, auto;
   padding: 100px;
-
+  background-color: #696E71;
 }
 
 .mainContainer {
   margin: 0, auto;
   padding: 25px;
-  background-color:rgb(230, 224, 224)
+  background-color:#6E7275;
 }
 
 .App {

@@ -100,21 +100,21 @@ const Main = () => {
     
 
     return (
-        <div>
+        <div className="mainContainer">
             <h1>User Main Page</h1>
             <Navigation search={false}/>
-            <Container>
+            <Container className="mainContainer">
                 <h5 align="center">{date}</h5>
                 <blockquote className="blockquote">
                     <p>{quote}</p>
                 </blockquote>
             </Container>
-            <Container as={Row}>
+            <Container className="mainContainer" as={Row}>
                 <div className=" col-4 panel">
                     <div className="panel-heading">
                     <h3 className="panel-title">Workout Details</h3>
                     </div>
-                    <Form onSubmit={(e) => {workoutComplete(e)}}>
+                    <Form className="bodys" onSubmit={(e) => {workoutComplete(e)}}>
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column sm={2}>
                                 Workout:
@@ -159,7 +159,7 @@ const Main = () => {
                                     value={workout.difficulty ? workout.difficulty : "None"}  />
                             </Col>
                         </Form.Group>
-                        <Button type="submit">Workout Complete</Button>
+                        <Button className="submit_btn" type="submit">Workout Complete</Button>
                     </Form>
                     <div className="panel-footer">
                     </div>

@@ -53,8 +53,8 @@ const Register= () => {
     return (
         <Container className='loginContainer'>
         <Card border="dark" className='text-center'>
-        <Card.Header style={{textAlign: "center", fontSize: "24px"}}>Register</Card.Header>
-        <Card.Body>
+        <Card.Header className="headers" style={{textAlign: "center", fontSize: "24px"}}>Register</Card.Header>
+        <Card.Body className="bodys">
         <Form onSubmit={register}>
             { confirmReg !== "" ? <h4>{confirmReg}</h4> : null }
             <Form.Group as={Row}>
@@ -92,10 +92,11 @@ const Register= () => {
                 {errs.confirmPassword? <span className="error">{errs.confirmPassword.message}</span> : null}
                 </Col>
             </Form.Group>
-        <Button variant="dark" type="submit" style={{width: "150px", textAlign: "center"}}>Register</Button>
+        <Button classsName="submit_btn" type="submit" style={{width: "150px", textAlign: "center"}}>Register</Button>
         </Form> 
-        </Card.Body>
+        
         <Link to="/">Return to Login Page</Link>
+        </Card.Body>
     </Card> 
     </Container>
     )
