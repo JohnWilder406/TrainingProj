@@ -83,11 +83,11 @@ const NewWorkout = (props) => {
     }
     
     return (
-        <Container>
+        <Container className="mainContainer">
             <h1>New Workout (user)</h1>
             <Navigation />
             <Card border="dark" className="text-center">
-                <Card.Body>
+                <Card.Body className="bodys">
                     <Form>
                         <Row className="mb-3">
                             <Form.Group as={Col} className="col-4">
@@ -111,20 +111,20 @@ const NewWorkout = (props) => {
                             </Form.Group>
 
                             <Form.Group as={Col} className="col-4">
-                                <Button onClick={(e) => addCalendar(e, startdate)}>Add to Calendar</Button>
+                                <Button className="submit_btn" onClick={(e) => addCalendar(e, startdate)}>Add to Calendar</Button>
                             </Form.Group> 
                         </Row>
                     </Form>
                 </Card.Body>
             </Card>
             <div>
-                <Navbar bg="dark" variant="dark">
+                <Navbar className="search">
                 <Nav>
-                <Navbar.Brand>Search Workouts</Navbar.Brand>
+                <Navbar.Brand style={{marginRight: "280px", marginLeft: "10px", color: "#D5E5EE"}}>Search Workouts</Navbar.Brand>
                 <Search searchQuery={searchQuery} onChange={updateInput} /> 
                 </Nav>
                 </Navbar>
-                <Table striped bordered hover variant="dark">
+                <table>
                     <thead>
                         <tr>
                             <th>Workout</th>
@@ -151,7 +151,7 @@ const NewWorkout = (props) => {
                                                     <td>{workouts.difficulty}</td>
                                                     <td>{workouts.frequency}</td>
                                                     <td>
-                                                        <Button onClick={(e) => addNew(
+                                                        <Button style={{backgroundColor: "#00060A"}}onClick={(e) => addNew(
                                                             workouts.name,
                                                             workouts.complete, 
                                                             workouts.duration, 
@@ -169,7 +169,7 @@ const NewWorkout = (props) => {
                             )
                         })
                     }
-                </Table>
+                </table>
             </div>
         </Container>
     );
