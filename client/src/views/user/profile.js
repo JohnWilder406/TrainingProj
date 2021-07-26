@@ -4,11 +4,13 @@ import {navigate} from '@reach/router';
 import { Container, Card, Form, Row, Col, Button } from  'react-bootstrap';
 import Navbar from '../../components/Navbar';
 import {LoginContext} from '../../context/context';
+import moment from 'moment'
 
 const Profile = (props) => {
     const {id, setId} = useContext(LoginContext);
     const {idx} = props;
     const [plans, setPlans] = useState([])
+    const [bday, setBday] = useState();
     const [errs, setErrs] = useState({});
     const [user, setUser] = useState({
         firstName: "firstName",
@@ -34,8 +36,9 @@ const Profile = (props) => {
     useEffect(() => {
         axios.get('http://localhost:8000/api/user/get/' + idx)
             .then((res) => {
-                console.log(res);
+                console.log(res.data);
                 setUser(res.data);
+                setBday(moment(res.data.birthday)._i.substr(0,10));
             })
             .catch((err) => {
                 console.log(err);
@@ -100,7 +103,7 @@ const Profile = (props) => {
                         
                             <Form.Group as={Col} className="col-6">
                                 <Form.Label column sm={3}>Birthday:</Form.Label>
-                                <Form.Control type="date" name="birthday" value={user.birthday ? user.birthday : ""} onChange={(e) => handleChange(e)}/>
+                                <Form.Control type="date" name="birthday" value={user.birthday ? bday : ""} onChange={(e) => handleChange(e)}/>
                             </Form.Group>
                         </Row>
 
