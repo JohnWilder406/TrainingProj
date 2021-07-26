@@ -3,7 +3,7 @@ import {navigate} from '@reach/router';
 import { Card, Form, Row, Col, Button } from  'react-bootstrap';
 
 const WorkoutForm = (props) => {
-    const {object, setObject, errors, handleSubmit, submitLabel, linkid} = props
+    const {edit, object, setObject, errors, handleSubmit, submitLabel, linkid} = props
 
 
     //input function to load changes into form for submission.
@@ -17,8 +17,10 @@ const WorkoutForm = (props) => {
 
     return (
         <Card border="dark" className="modularForm">
-            <h1>Workout Form Page</h1>
-            <Card.Body>
+            {
+                edit ? <Card.Header className="headers" style={{textAlign: "center", fontSize: "24px"}}>Edit Workout Plan</Card.Header> : <Card.Header className="headers" style={{textAlign: "center", fontSize: "24px"}}>Add Workout Plan</Card.Header>
+            }
+            <Card.Body className="bodys">
                 <Form onSubmit={(e) => handleSubmit(e)}>
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2}>
@@ -122,10 +124,10 @@ const WorkoutForm = (props) => {
                     </Form.Group>
                 <Form.Group as={Row}>
                 <Col sm={{span: 1, offset: 4}}>
-                <Button variant="dark" style={{width: "150px"}} type="submit">{submitLabel}</Button>
+                <Button className="submit_btn" style={{width: "150px"}} type="submit">{submitLabel}</Button>
                 </Col>
                 <Col sm={{span: 1, offset: 1}}>
-                <Button variant="dark" style={{width: "150px"}} onClick={(e) => navigate("/admin/" + linkid + "/editplan")}>Cancel</Button>
+                <Button className="submit_btn" style={{width: "150px"}} onClick={(e) => navigate("/admin/" + linkid + "/editplan")}>Cancel</Button>
                 </Col>
                 </Form.Group>
             </Form>

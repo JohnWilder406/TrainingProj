@@ -40,15 +40,14 @@ const EditWorkout = (props) => {
 
     return (
         <Container>
-        <h1>Edit Workout Plan Page (admin)</h1>
         <Navbar bg="dark" variant="dark">
-            <Navbar.Brand>Crusher Training App</Navbar.Brand>
-            <Nav className="mr-auto">
-                <Button variant="outline-dark"><Link to="/admin/main">Main Page</Link></Button>
-            </Nav>
-        </Navbar>
-        <WorkoutForm linkid={training} object={workout} setObject={setWorkout} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Workout"}/>
-    </Container>
+            <Navbar.Brand style={{marginLeft: "10px"}}>Crusher Training App</Navbar.Brand>
+                <Nav className="mr-auto">
+                    <Button variant="outline-dark"><Link to="/admin/main">Main Page</Link></Button>
+                </Nav>
+            </Navbar>
+            <WorkoutForm edit={true} linkid={training} object={workout} setObject={setWorkout} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Workout"}/>
+        </Container>
     )
 }
 

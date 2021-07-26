@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {Link} from '@reach/router';
+import {Link, navigate} from '@reach/router';
 import { Container, Card, Table, Navbar, Nav, Button } from  'react-bootstrap';
 import Search from '../../components/Search';
 import Logout from '../../components/Logout';
@@ -27,17 +27,18 @@ const AdminMain = () => {
 
 
         //search filter
-        const updateInput = async (searchQuery) => {
-            const filtered = plansDefault.filter(plan => {
-                if(plan.name.toLowerCase().includes(searchQuery.toLowerCase())) {
-                    return plan.name.toLowerCase().includes(searchQuery.toLowerCase())
-                }
-                
-            })
-            setSearchQuery(searchQuery);
-            setPlans(filtered)
-        }
+    const updateInput = async (searchQuery) => {
+        const filtered = plansDefault.filter(plan => {
+            if(plan.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+                return plan.name.toLowerCase().includes(searchQuery.toLowerCase())
+            }
+            
+        })
+        setSearchQuery(searchQuery);
+        setPlans(filtered)
+    }
     
+        //refreshes page to remove deleted items
         const afterDeleteHandler = (deletedPlanId) => {
             let filteredPlanArray = plans.filter((plan) => {
                 return plan._id !== deletedPlanId
@@ -48,19 +49,23 @@ const AdminMain = () => {
 
     return (
         <Container className="mainContainer">
-            <Navbar className="headers">
-                <Navbar.Brand className="navbrand">Crusher Training Admin Portal</Navbar.Brand>
+            <Navbar bg="dark" variant="dark">
+                <Navbar.Brand style={{marginLeft: "10px"}} className="navbrand">Crusher Training Admin Portal</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Button variant="outline-dark"><Link to="/admin/main">Home</Link></Button>
-                    <Button variant="outline-dark"><Link to="/admin/addplan">New Training Plan</Link></Button>
-                    <Button variant="outline-dark"><Link to="/admin/userlist">User Management</Link></Button>
+                    <Button className="btn btn-dark" variant="outline-dark"><Link to="/admin/main">Home</Link></Button>
+                    <Button className="btn btn-dark" variant="outline-dark"><Link to="/admin/addplan">New Training Plan</Link></Button>
+                    <Button className="btn btn-dark" variant="outline-dark"><Link to="/admin/userlist">User Management</Link></Button>
                 </Nav>
-                <Logout admin={true}/>
-                <Search searchQuery={searchQuery} onChange={updateInput} />
+                <div style={{marginLeft: "275px"}}>
+                    <Search searchQuery={searchQuery} onChange={updateInput} />
+                </div>
+                <div style={{marginLeft: "10px"}}>
+                    <Logout admin={true}/>
+                </div>
             </Navbar>
-            <Card className="modularForm">
-                <Card.Body>
-                    <Table bordered striped hover>
+            <Card border="dark" className="modularForm">
+                <Card.Body className="bodys" >
+                    <table>
                         <thead>
                             <tr>
                                 <th>Plan Name</th>
@@ -73,12 +78,12 @@ const AdminMain = () => {
                             {
                                 plans.map((plan, idx) => {
                                     return (
-                                        <tr key={idx}><td>{plan.name}</td><td>{plan.difficulty}</td><td>{plan.workouts.length}</td><td><Button variant="none"><Link to={"/admin/" + plan._id + "/editplan"}>Edit Plan</Link></Button><Button variant="none"><Link to={'/admin/training/' + plan._id + '/addworkout'}>Add Workout</Link></Button><DeleteButton mongoLabel={"plans"} deleteLabel={"Delete Training Plan"} id={plan._id} afterDeleteHandler={afterDeleteHandler} /></td></tr>
+                                        <tr key={idx}><td>{plan.name}</td><td>{plan.difficulty}</td><td>{plan.workouts.length}</td><td><Button style={{backgroundColor: "#00060A", marginRight: "10px"}} onClick={(e) => navigate("/admin/" + plan._id + "/editplan")}>Edit Plan</Button><Button style={{backgroundColor: "#00060A", marginRight: "10px"}} onClick={(e)=> navigate('/admin/training/' + plan._id + '/addworkout')}>Add Workout</Button><DeleteButton mongoLabel={"plans"} deleteLabel={"Delete Training Plan"} id={plan._id} afterDeleteHandler={afterDeleteHandler} /></td></tr>
                                     )
                                 })
                             }
                         </tbody>
-                    </Table>
+                    </table>
                 </Card.Body>
             </Card>
         </Container>

@@ -16,9 +16,11 @@ const ModularForm = (props) => {
     }
 
     return (
-        <Card border="dark" className="modularForm">
-            <h1>Modular Form Page</h1>
-            <Card.Body>
+        <Card border="dark" className="text-center">
+            {
+                edit ? <Card.Header className="headers" style={{textAlign: "center", fontSize: "24px"}}>Edit Training Plan</Card.Header> : <Card.Header className="headers" style={{textAlign: "center", fontSize: "24px"}}>Add Training Plan</Card.Header>
+            }
+            <Card.Body className="bodys">
                 <Form onSubmit={(e) => handleSubmit(e)}>
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2}>
@@ -52,8 +54,8 @@ const ModularForm = (props) => {
                                 <option value="olympic">Olympic</option>
                             </Form.Control>
                                 { 
-                                errors.difficulty ? <span className="error">{errors.difficulty.message}</span> : null
-                            }
+                                    errors.difficulty ? <span className="error">{errors.difficulty.message}</span> : null
+                                }
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" >
@@ -80,15 +82,20 @@ const ModularForm = (props) => {
                     </Form.Group>
                 <Form.Group as={Row}>
                     {
-                        edit ? <><Col sm={{span: 1, offset: 4}}>
-                <Button variant="dark" style={{width: "150px"}} type="submit">{submitLabel}</Button>
-                </Col>
-                <Col sm={{span: 1, offset: 1}}>
-                <Button variant="dark" style={{width: "150px"}} onClick={(e) => navigate('/admin/training/' + linkid + '/addworkout')}>Add Workout</Button>
-                </Col></> : <><Col sm={{span: 1, offset: 5}}>
-                <Button variant="dark" style={{width: "150px"}} type="submit">{submitLabel}</Button>
-                </Col></>
-
+                        edit ? 
+                        <>
+                            <Col sm={{span: 1, offset: 4}}>
+                                <Button className="submit_btn" style={{width: "150px"}} type="submit">{submitLabel}</Button>
+                            </Col>
+                            <Col sm={{span: 1, offset: 1}}>
+                                <Button className="submit_btn" style={{width: "150px"}} onClick={(e) => navigate('/admin/training/' + linkid + '/addworkout')}>Add Workout</Button>
+                            </Col>
+                        </> : 
+                        <>
+                            <Col sm={{span: 1, offset: 5}}>
+                                <Button className="submit_btn" style={{width: "150px"}} type="submit">{submitLabel}</Button>
+                            </Col>
+                        </>
                     }
                 </Form.Group>
             </Form>
