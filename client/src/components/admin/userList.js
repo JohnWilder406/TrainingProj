@@ -11,6 +11,7 @@ const UserList = () => {
     const [userDefault, setUserDefault] = useState([]);
     const [searchQuery, setSearchQuery] = useState();
 
+    //retrieves all users from database
     useEffect(() => {
         axios.get('http://localhost:8000/api/users/get')
             .then((res) => {
@@ -53,6 +54,7 @@ const UserList = () => {
         .catch(err => console.log(err));
     }
 
+//refreshes page view to remove deleted item
     const afterDeleteHandler = (deletedPlanId) => {
         let filteredUserArray = userList.filter((user) => {
             return user._id !== deletedPlanId
@@ -63,41 +65,43 @@ const UserList = () => {
 
     return (
         <Container>
-        <h1>User List page</h1>
-        <Navbar bg="dark" variant="dark">
-                <Navbar.Brand>Crusher Training Admin Portal</Navbar.Brand>
+        <Navbar  bg="dark" variant="dark">
+            <Navbar.Brand style={{marginLeft: "10px"}}>Crusher Training Admin Portal</Navbar.Brand>
                 <Nav className="mr-auto">
                     <Button variant="outline-dark"><Link to="/admin/main">Home</Link></Button>
                     <Button variant="outline-dark"><Link to="/admin/addplan">New Training Plan</Link></Button>
-                    <Button variant="outline-dark"><Link to="/admin/userlist">User Management</Link></Button>
                 </Nav>
-                <Logout admin={true}/>
-                <Search searchQuery={searchQuery} onChange={updateInput} />
+                <div style={{marginLeft: "460px"}}>
+                    <Search searchQuery={searchQuery} onChange={updateInput} />
+                </div>
+                <div style={{marginLeft: "10px"}}>
+                    <Logout admin={true}/>
+                </div>
             </Navbar>
         <Card className="modularForm">
-                <Card.Body>
-                    <Table bordered striped hover>
-                        <thead>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Admin?</th>
-                                <th>Delete User</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                userList.map((user, idx) => {
-                                    return (
-                                        <tr key={idx}><td>{user.firstName}</td><td>{user.lastName}</td><td>{user.admin ? <Button variant="success" onClick={(e)=>adminChange(user, false)}>Yes</Button> : <Button variant="secondary" onClick={(e)=>adminChange(user, true)}>No</Button>}</td><td><DeleteButton id={user._id} afterDeleteHandler={afterDeleteHandler} deleteLabel={"Delete " + user.firstName + "?"} mongoLabel={"users"} /></td></tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </Table>
-                </Card.Body>
-            </Card>
-        </Container>
+            <Card.Body>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Admin?</th>
+                            <th>Delete User</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            userList.map((user, idx) => {
+                                return (
+                                    <tr key={idx}><td>{user.firstName}</td><td>{user.lastName}</td><td>{user.admin ? <Button variant="success" onClick={(e)=>adminChange(user, false)}>Yes</Button> : <Button variant="secondary" onClick={(e)=>adminChange(user, true)}>No</Button>}</td><td><DeleteButton id={user._id} afterDeleteHandler={afterDeleteHandler} deleteLabel={"Delete " + user.firstName + "?"} mongoLabel={"users"} /></td></tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+            </Card.Body>
+        </Card>
+    </Container>
         
     )
 }

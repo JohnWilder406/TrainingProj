@@ -101,3 +101,8 @@ td {
 .modularForm {
   background-color:rgb(214, 210, 210)
 }
+
+.button-link {
+  text-decoration: none;
+  color: white;
+}

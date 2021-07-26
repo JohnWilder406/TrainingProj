@@ -14,6 +14,7 @@ const AddTraining = () => {
         duration: "", 
     })
 
+    //adds training plan to database
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost:8000/api/plans/add_plan', plan)
@@ -35,11 +36,10 @@ const AddTraining = () => {
 
     return (
         <Container>
-            <h1>Add Training Plan Page</h1>
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand>Crusher Training App</Navbar.Brand>
+                <Navbar.Brand style={{marginLeft: "10px"}} >Crusher Training App</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Button variant="outline-dark"><Link to="/admin/main">Main Page</Link></Button>
+                    <Button className="btn btn-dark" variant="outline-dark"><Link to="/admin/main">Main Page</Link></Button>
                 </Nav>
             </Navbar>
             <ModularForm edit={false} object={plan} setObject={setPlan} errors={errors} handleSubmit={handleSubmit} submitLabel={"Add Plan"} />
