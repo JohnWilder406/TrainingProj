@@ -28,10 +28,13 @@ const Main = () => {
 
     // workout set function
     function today(arr) {
+        console.log(arr)
+        console.log(date)
         let newObj = {}
         for (var i = 0; i < arr.length; i++) {
-            let today = new Date(arr[i].startdate)
-            if(today.toDateString() === date) {
+            let today =  new Date(arr[i].startdate).toDateString()
+            console.log(today)
+            if(today == date) {
                 newObj = arr[i]
             }
         }

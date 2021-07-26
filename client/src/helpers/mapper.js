@@ -7,7 +7,7 @@ const mapper = (arr) => {
         let obj = {start: moment(arr[i].startdate), end: moment(arr[i].startdate), title: arr[i].name}
         newArr.push(obj)
     }
-
+    console.log(newArr)
     return newArr
 }
 

@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Button, Table } from  'react-bootstrap';
-import Navbar from '../Navbar';
+import { Container, Card, Form, Row, Col, Button, Table, Navbar, Nav } from  'react-bootstrap';
+import Navigation from '../Navbar'
+import moment from 'moment'
+import Search from '../Search';
 
 const NewWorkout = (props) => {
     //const [user, setUser] = useState({});
     const [training, setTraining] = useState([]);
+    const [trainDefault, setTrainDefault] = useState([]);
+    const [searchQuery, setSearchQuery] = useState();
     const [newWorkout, setNewWorkout] = useState({});
     const [userWorkout, setUserWorkout] = useState({});
     const [startdate, setStartdate] = useState();
@@ -41,9 +45,11 @@ const NewWorkout = (props) => {
     //Sets the start date
     const addCalendar = (e, startdate ) => {
         e.preventDefault();
-
+        let currentDate = moment(startdate)
+        console.log(currentDate)
         let newObject = {...newWorkout}
-        newObject.startdate = startdate
+        newObject.startdate = currentDate
+        console.log(newObject)
         setUserWorkout(newObject);
     } 
     
@@ -62,13 +68,24 @@ const NewWorkout = (props) => {
         } else {
             console.log(userWorkout);
         }
-
     }, [userWorkout]);
+
+        // //search filter
+    const updateInput = async (searchQuery) => {
+        const filtered = trainDefault.filter(plan => {
+            if(plan.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+                return plan.name.toLowerCase().includes(searchQuery.toLowerCase())
+            }
+            
+        })
+        setSearchQuery(searchQuery);
+        setTraining(filtered)
+    }
     
     return (
         <Container>
             <h1>New Workout (user)</h1>
-            <Navbar search={true}/>
+            <Navigation />
             <Card border="dark" className="text-center">
                 <Card.Body>
                     <Form>
@@ -78,6 +95,7 @@ const NewWorkout = (props) => {
                                     type="text" 
                                     name="name" 
                                     placeholder="Workout Name" 
+                                    readOnly
                                     value={newWorkout.name ? newWorkout.name : ""}
                                 />
                             </Form.Group>
@@ -100,7 +118,12 @@ const NewWorkout = (props) => {
                 </Card.Body>
             </Card>
             <div>
-                
+                <Navbar bg="dark" variant="dark">
+                <Nav>
+                <Navbar.Brand>Search Workouts</Navbar.Brand>
+                <Search searchQuery={searchQuery} onChange={updateInput} /> 
+                </Nav>
+                </Navbar>
                 <Table striped bordered hover variant="dark">
                     <thead>
                         <tr>

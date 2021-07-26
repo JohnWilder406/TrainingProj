@@ -6,8 +6,7 @@ import {LoginContext} from '../context/context';
 import Logout from './Logout';
 
 const Navigation = (props) => {
-    const {id} = useContext(LoginContext);
-    const {search, admin} = props  
+    const {id} = useContext(LoginContext); 
     
 
     return (
@@ -19,10 +18,7 @@ const Navigation = (props) => {
                     <Button className="btn btn-link" variant="outline-dark" onClick={(e) => navigate('/users/' + id + '/newworkout')}>New Workout</Button>
                     <Button className="btn btn-link" variant="outline-dark" onClick={(e) => navigate('/users/' + id + '/profile')}>Edit Profile</Button>
                 </Nav>
-                <Logout admin={admin}/>
-                {
-                    search ? <Search /> : <span></span>
-                }
+                <Logout />
             </Navbar>
         </div>
     )
