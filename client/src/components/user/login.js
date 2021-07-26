@@ -44,8 +44,8 @@ const Login = (props) => {
     return (
         <Container className='loginContainer' >
         <Card border="dark" className="text-center">
-        <Card.Header style={{fontSize: "24px"}}>Login</Card.Header>
-        <Card.Body>
+        <Card.Header className="headers" style={{fontSize: "24px"}}>Login</Card.Header>
+        <Card.Body className="bodys">
         <Form  className='text-center' onSubmit={login}>
             <Form.Group as={Row} className='text-center'>
                 <Form.Label column sm={2}>Email:</Form.Label>
@@ -59,11 +59,12 @@ const Login = (props) => {
                 <Form.Control type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
                 </Col>
             </Form.Group>
-        <Button className='mb-2' variant="dark" size="lg" type="submit" >Login</Button>
+        <Button className='submit_btn' size="lg" type="submit" >Login</Button>
         </Form>
+        
+        <Row><Link style={{margin: 'auto'}} to="/register">Not registered? Click here.</Link></Row>
+        <Row><Link style={{margin: 'auto'}} to="/admin">Admin? Click here.</Link></Row>
         </Card.Body>
-        <Link style={{margin: 'auto'}} to="/register">Not registered? Click here.</Link>
-        <Link style={{margin: 'auto'}} to="/admin">Admin? Click here.</Link>
     </Card>
 
     {/* The animation = false removes an error for the findDOMNode depreciated warning.  */}
