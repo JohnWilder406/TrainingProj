@@ -48,9 +48,8 @@ const AdminMain = () => {
 
     return (
         <Container className="mainContainer">
-        <h1>Admin Main page </h1>
-            <Navbar bg="dark" variant="dark">
-                <Navbar.Brand>Crusher Training Admin Portal</Navbar.Brand>
+            <Navbar className="headers">
+                <Navbar.Brand className="navbrand">Crusher Training Admin Portal</Navbar.Brand>
                 <Nav className="mr-auto">
                     <Button variant="outline-dark"><Link to="/admin/main">Home</Link></Button>
                     <Button variant="outline-dark"><Link to="/admin/addplan">New Training Plan</Link></Button>

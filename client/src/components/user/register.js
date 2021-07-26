@@ -92,7 +92,7 @@ const Register= () => {
                 {errs.confirmPassword? <span className="error">{errs.confirmPassword.message}</span> : null}
                 </Col>
             </Form.Group>
-        <Button classsName="submit_btn" type="submit" style={{width: "150px", textAlign: "center"}}>Register</Button>
+        <Button className="submit_btn" type="submit" size="lg" >Register</Button>
         </Form> 
         
         <Link to="/">Return to Login Page</Link>

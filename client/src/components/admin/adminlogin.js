@@ -41,8 +41,8 @@ const AdminLogin = (props) => {
     return (
         <Container className='loginContainer' >
         <Card border="dark" className="text-center">
-        <Card.Header style={{fontSize: "24px"}}>Admin Login</Card.Header>
-        <Card.Body>
+        <Card.Header className="headers" style={{fontSize: "24px"}}>Admin Login</Card.Header>
+        <Card.Body className="bodys">
         <Form  className='text-center' onSubmit={login}>
             <Form.Group as={Row} className='text-center'>
                 <Form.Label column sm={2}>Email:</Form.Label>
@@ -56,12 +56,12 @@ const AdminLogin = (props) => {
                 <Form.Control type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
                 </Col>
             </Form.Group>
-        <Button className='mb-2' variant="dark" size="lg" type="submit" >Login</Button>
+        <Button className='submit_btn' size="lg" type="submit" >Login</Button>
         </Form>
-        </Card.Body>
         <Link style={{margin: 'auto'}} to="/">Not an Admin? Click here.</Link>
+        </Card.Body>
     </Card>
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Body className="error text-center">
             {errors}
         </Modal.Body>

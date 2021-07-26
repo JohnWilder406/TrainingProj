@@ -26,6 +26,8 @@ input {
 
 .submit_btn {
   background-color: #014268;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .bodys {
