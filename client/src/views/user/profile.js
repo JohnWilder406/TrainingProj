@@ -73,12 +73,12 @@ const Profile = (props) => {
     }, [])
 
     return (
-        <Container>
+        <Container className='loginContainer'>
             <h1>Profile page</h1>
             <Navbar search={false}/>
             <Card border="dark" className="text-center">
-                <Card.Header style={{textAlign: "center", fontSize: "24px"}}>Edit Profile</Card.Header>
-                <Card.Body>
+                <Card.Header className="headers" style={{textAlign: "center", fontSize: "24px"}}>Edit Profile</Card.Header>
+                <Card.Body  className="bodys">
                     <Form onSubmit={(e) => updateProfile(e)}>
                         <Row className="mb-3">
                             <Form.Group as={Col} className="col-6">
@@ -109,7 +109,7 @@ const Profile = (props) => {
 
                         <Row className="mb-3">
                             <Form.Group as={Col} className="col-6">
-                                <Form.Label column sm={3}>Height(in inches):</Form.Label>
+                                <Form.Label column sm={3}>Height (in inches):</Form.Label>
                                 <Form.Control type="number" name="height" value={user.height ? user.height : 0} onChange={(e) => handleChange(e)} placeholder="Enter your height"/>
                             </Form.Group>
                         
@@ -137,7 +137,7 @@ const Profile = (props) => {
 
                         <Row className="mb-3">
                             <Form.Group as={Col} className="col-6">
-                                <Form.Label column sm={3}>Weight (in pounds):</Form.Label>
+                                <Form.Label column sm={4}>Weight (in pounds):</Form.Label>
                                 <Form.Control type="number" name="weight" value={user.weight ? user.weight : 0} onChange={(e) => handleChange(e)} placeholder="Enter your weight"/>
                             </Form.Group>
                         
@@ -160,8 +160,8 @@ const Profile = (props) => {
                                     }
                             </Form.Group> */}
                         </Row>
-                        <Button className="btn btn-defualt" onClick={(e) => navigate('/main')} >Cancel</Button>
-                        <Button  style={{margin: "10px"}} type="submit" className="btn btn-primary">Update Profile</Button>
+                        <Button className="cancel_btn" onClick={(e) => navigate('/main')} >Cancel</Button>
+                        <Button  style={{margin: "10px"}} type="submit" className="submit_btn">Update Profile</Button>
                     </Form>
                 </Card.Body>
             </Card>
