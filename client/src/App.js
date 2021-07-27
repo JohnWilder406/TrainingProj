@@ -19,8 +19,8 @@ import UserList from './components/admin/userList';
 
 
 function App() {
-  const [token, setToken] = useState(true)
-  const [admin, setAdmin] = useState(true)
+  const [token, setToken] = useState(false)
+  const [admin, setAdmin] = useState(false)
 
   return (
     <div className="App">
