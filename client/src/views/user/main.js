@@ -26,14 +26,12 @@ const Main = () => {
     const [workout, setWorkout] = useState({});
     const [newWorkout, setNewWorkout] = useState({});
 
+
     // workout set function
     function today(arr) {
-        console.log(arr)
-        console.log(date)
         let newObj = {}
         for (var i = 0; i < arr.length; i++) {
             let today =  new Date(arr[i].startdate).toDateString()
-            console.log(today)
             if(today == date) {
                 newObj = arr[i]
             }
@@ -54,10 +52,9 @@ const Main = () => {
 
     //calls user data and populates current workout and calendar data
     useEffect(() => {
-        axios.get('http://localhost:8000/api/user/get/' + id)
+        axios.get('http://localhost:8000/api/users/get/' + id)
             .then((res) => {
                 console.log(res.data.workouts)
-                console.log(date);
                 setUser(res.data);
                 setEvents(mapper(res.data.workouts))
                 setWorkout(today(res.data.workouts))
@@ -89,7 +86,7 @@ const Main = () => {
         axios.put('http://localhost:8000/api/users/' + id + '/complete/' + workout._id, newWorkout)
             .then((res) => {
                 console.log(res)
-                axios.get('http://localhost:8000/api/user/get/'+ id)
+                axios.get('http://localhost:8000/api/users/get/'+ id)
                     .then((res) => {
                         console.log(res.data)
                         setEvents(mapper(res.data.workouts))

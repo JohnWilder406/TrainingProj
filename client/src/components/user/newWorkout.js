@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import {navigate, Link} from '@reach/router';
-import { Container, Card, Form, Row, Col, Button, Table, Navbar, Nav } from  'react-bootstrap';
+import {navigate} from '@reach/router';
+import { Container, Card, Form, Row, Col, Button, Navbar, Nav } from  'react-bootstrap';
 import Navigation from '../Navbar'
 import moment from 'moment'
 import Search from '../Search';
 
 const NewWorkout = (props) => {
-    //const [user, setUser] = useState({});
     const [training, setTraining] = useState([]);
     const [trainDefault, setTrainDefault] = useState([]);
     const [searchQuery, setSearchQuery] = useState();
@@ -16,18 +15,23 @@ const NewWorkout = (props) => {
     const [startdate, setStartdate] = useState();
     const workoutRef = useRef(userWorkout);
     const {id} = props;
+    const date = new Date()
 
-    //gets training plans for mapping over
+
+
+// gets workouts from users training plan selection
     useEffect(() => {
-        axios.get('http://localhost:8000/api/plans')
+        axios.get('http://localhost:8000/api/users/get/' + id)
             .then((res) => {
-                console.log(res);
-                setTraining(res.data);
+                console.log(res.data.training)
+                axios.get('http://localhost:8000/api/plans/' + res.data.training)
+                    .then((res) => {
+                        console.log(res.data.workouts)
+                        setTraining(res.data.workouts)
+                        setTrainDefault(res.data.workouts)
+                    })
             })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, []);
+    }, [id])
     
     //this function adds the newWork out to the input field of the form.
     const addNew = (name, complete, duration, intensity, difficulty, frequency, startdate) => { 
@@ -68,7 +72,7 @@ const NewWorkout = (props) => {
         } else {
             console.log(userWorkout);
         }
-    }, [userWorkout]);
+    }, [userWorkout, id]);
 
         // //search filter
     const updateInput = async (searchQuery) => {
@@ -103,7 +107,7 @@ const NewWorkout = (props) => {
                                 <Form.Control 
                                     type="date" 
                                     name="startdate" 
-                                    value={startdate} 
+                                    value={startdate ? startdate : date } 
                                     onChange={(e) => setStartdate(e.target.value)}
                                 />
                                 <Form.Label>Starting Date</Form.Label>
@@ -135,14 +139,9 @@ const NewWorkout = (props) => {
                                 <th>Add</th>
                             </tr>
                         </thead>
-                        {/* Currently this is pulling all plans from db. So if there is more than one it would likely populate with other works */}
-
-                        {
-                            training.map((plan, index) => {
-                                return (
-                                    <tbody key={index}>
+                                    <tbody>
                                         {
-                                            plan.workouts.map((workouts, i) => {
+                                            training.map((workouts, i) => {
                                                 return (
                                                     <tr key={i}>
                                                         <td>{workouts.name}</td>
@@ -166,9 +165,6 @@ const NewWorkout = (props) => {
                                             })
                                         }
                                     </tbody>
-                                )
-                            })
-                        }
                     </table>
                 </Container>
             </div>

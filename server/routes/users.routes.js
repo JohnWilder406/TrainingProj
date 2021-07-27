@@ -5,7 +5,7 @@ module.exports = (app) => {
     app.post("/api/users/login", UserController.login);
     app.post("/api/users/logout", UserController.logout);
     app.put("/api/users/:id", UserController.update);
-    app.get("/api/user/get/:id", UserController.get);
+    app.get("/api/users/get/:id", UserController.get);
     app.get("/api/users/get", UserController.getAllUsers);
 
     //path for adding workouts to user

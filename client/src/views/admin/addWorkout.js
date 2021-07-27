@@ -34,7 +34,7 @@ const AddWorkout = (props) => {
     }
 
     return (
-        <Container classaName="mainContainer">
+        <Container className="mainContainer">
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand style={{marginLeft: "10px"}}>Crusher Training App</Navbar.Brand>
                 <Nav className="mr-auto">

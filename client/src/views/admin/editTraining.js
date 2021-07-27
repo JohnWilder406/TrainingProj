@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {Link} from '@reach/router';
-import { Container, Card, Table, Button, Navbar, Nav } from  'react-bootstrap';
+import { Container, Card, Button, Navbar, Nav } from  'react-bootstrap';
 import ModularForm from '../../components/admin/form';
 import Search from '../../components/Search';
 import DeleteWorkout from '../../components/admin/deleteWorkout';

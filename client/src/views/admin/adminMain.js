@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {Link, navigate} from '@reach/router';
-import { Container, Card, Table, Navbar, Nav, Button } from  'react-bootstrap';
+import { Container, Card, Navbar, Nav, Button } from  'react-bootstrap';
 import Search from '../../components/Search';
 import Logout from '../../components/Logout';
 import DeleteButton from '../../components/DeleteButton';

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import {navigate} from '@reach/router';
-import { Button, Container, Nav, Navbar} from  'react-bootstrap';
-import Search from './Search';
+import { Button, Nav, Navbar} from  'react-bootstrap';
 import {LoginContext} from '../context/context';
 import Logout from './Logout';
 

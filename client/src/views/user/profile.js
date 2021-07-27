@@ -7,7 +7,7 @@ import {LoginContext} from '../../context/context';
 import moment from 'moment'
 
 const Profile = (props) => {
-    const {id, setId} = useContext(LoginContext);
+    const {setId} = useContext(LoginContext);
     const {idx} = props;
     const [plans, setPlans] = useState([])
     const [bday, setBday] = useState();
@@ -34,7 +34,7 @@ const Profile = (props) => {
 
     //gets user data to populate form
     useEffect(() => {
-        axios.get('http://localhost:8000/api/user/get/' + idx)
+        axios.get('http://localhost:8000/api/users/get/' + idx)
             .then((res) => {
                 console.log(res.data);
                 setUser(res.data);
@@ -115,7 +115,7 @@ const Profile = (props) => {
 
                         
                             <Form.Group as={Col} className="col-6">
-                                <Form.Label column sm={3}>Sport:</Form.Label>
+                                <Form.Label column sm={4}>Training Plan (difficulty):</Form.Label>
                                 <Form.Control 
                                     as="select"  
                                     name="training" 
