@@ -73,8 +73,7 @@ const Profile = (props) => {
     }, [])
 
     return (
-        <Container className='loginContainer'>
-            <h1>Profile page</h1>
+        <Container className='mainContainer'>
             <Navbar search={false}/>
             <Card border="dark" className="text-center">
                 <Card.Header className="headers" style={{textAlign: "center", fontSize: "24px"}}>Edit Profile</Card.Header>

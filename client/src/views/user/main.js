@@ -100,76 +100,80 @@ const Main = () => {
     
 
     return (
-        <div className="mainContainer">
-            <h1>User Main Page</h1>
+        <Container className="mainContainer">
             <Navigation search={false}/>
-            <Container className="mainContainer">
-                <h5 align="center">{date}</h5>
-                <blockquote className="blockquote">
-                    <p>{quote}</p>
-                </blockquote>
-            </Container>
-            <Container className="mainContainer" as={Row}>
-                <div className=" col-4 panel">
-                    <div className="panel-heading">
-                    <h3 className="panel-title">Workout Details</h3>
-                    </div>
-                    <Form className="bodys" onSubmit={(e) => {workoutComplete(e)}}>
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm={2}>
-                                Workout:
-                            </Form.Label>
-                            <Col sm={5}>
-                                <Form.Control
-                                    readOnly plaintext
-                                    name="name"
-                                    value={workout.name ? workout.name : "No Workout Today"}  />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm={2}>
-                                Duration:
-                            </Form.Label>
-                            <Col sm={5}>
-                                <Form.Control
-                                    readOnly plaintext
-                                    name="duration"
-                                    value={workout.duration ? workout.duration + " mins": 0}  />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm={2}>
-                                Intensity:
-                            </Form.Label>
-                            <Col sm={5}>
-                                <Form.Control
-                                    readOnly plaintext
-                                    name="intensity"
-                                    value={workout.intensity ? workout.intensity : "None"}  />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm={2}>
-                                Difficulty:
-                            </Form.Label>
-                            <Col sm={5}>
-                                <Form.Control
-                                    readOnly plaintext
-                                    name="difficulty"
-                                    value={workout.difficulty ? workout.difficulty : "None"}  />
-                            </Col>
-                        </Form.Group>
-                        <Button className="submit_btn" type="submit">Workout Complete</Button>
-                    </Form>
-                    <div className="panel-footer">
-                    </div>
+            <div className="blue">
+                <div className="quotes">
+                    <h5 align="center">{date}</h5>
+                    <blockquote className="quotes">
+                        <p>{quote}</p>
+                    </blockquote>
                 </div>
+                <Container className="mainSpacing" as={Row}>
+                    <div className="col-4 panel">
+                        <div className="panel-heading">
+                            <h3 className="title">Workout Details</h3>
+                            
+                            <Form className="workoutDetails" onSubmit={(e) => {workoutComplete(e)}}>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Form.Label column sm={3}>
+                                        Workout:
+                                    </Form.Label>
+                                    <Col sm={6}>
+                                        <Form.Control
+                                            readOnly plaintext
+                                            name="name"
+                                            value={workout.name ? workout.name : "No Workout Today"}  />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Form.Label column sm={3}>
+                                        Duration:
+                                    </Form.Label>
+                                    <Col sm={6}>
+                                        <Form.Control
+                                            readOnly plaintext
+                                            name="duration"
+                                            value={workout.duration ? workout.duration + " mins": 0}  />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Form.Label column sm={3}>
+                                        Intensity:
+                                    </Form.Label>
+                                    <Col sm={6}>
+                                        <Form.Control
+                                            readOnly plaintext
+                                            name="intensity"
+                                            value={workout.intensity ? workout.intensity : "None"}  />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Form.Label column sm={3}>
+                                        Difficulty:
+                                    </Form.Label>
+                                    <Col sm={6}>
+                                        <Form.Control
+                                            readOnly plaintext
+                                            name="difficulty"
+                                            value={workout.difficulty ? workout.difficulty : "None"}  />
+                                    </Col>
+                                    </Form.Group>
+                                <Button className="submit_btn" type="submit">Workout Complete</Button>
+                            </Form>
+                        </div>
+                        <div className="panel-footer">
+                        </div>
+                    </div>
 
-                <div className=" col-8">
-                    <CalendarComp eventList={events} />
-                </div>  
-            </Container>
-        </div>
+                    <div className=" col-8">
+                        <div className="mainCalendar">
+                            <CalendarComp eventList={events} />
+                        </div>
+                    </div>  
+                </Container>
+            </div>
+        </Container>
         
     )
 }

@@ -3,12 +3,19 @@ html, body, body > div, .app {
   width: 100%;
 }
 
-.panel-heading {
-  background-color: #013F64;
+.blue {
+  background-color: #28536C;
 }
 
-.panel-title {
-  color:#D8E3EA;
+.userNav {
+  width: 100%;
+  padding: 1%;
+  margin-left: 0px;
+}
+
+.mainSpacing {
+  margin: 15px;
+  padding: 20px;
 }
 
 .headers {
@@ -16,8 +23,41 @@ html, body, body > div, .app {
   color: white;
 }
 
+.workoutDetails {
+  margin: 0px;
+  padding: 3px;
+  background-color: #D8E3EA;
+  color: #00060A;
+  text-align: center;
+}
+
+.panel-heading {
+  margin-top: 5px;
+  background-color:#00060A;
+  text-align: center;
+}
+
+.title {
+  color:#D8E3EA;
+}
+
+.panel-footer {
+  margin: 0;
+}
+
+.mainCalendar {
+  height: 340px;
+  margin-top: 5px;
+  padding: 10px;
+  background-color: #D8E3EA;
+}
+
 .quotes {
-  background-color: #6E7275;
+  width: 100%;
+  padding-top: 5px;
+  background-color: #28536C;
+  color:#D8E3EA;
+  text-align: center;
 }
 
 input {
@@ -38,7 +78,7 @@ input {
   background-color: #00060A;
   color: #D8E3EA;
   padding: 10px;
-  margin: 5px;
+  margin-top: 5px;
 }
 
 table {
@@ -74,6 +114,7 @@ td {
 .bodys {
   background-color: #D8E3EA;
   color: black;
+  height: fit-content;
 }
 
 .error {
