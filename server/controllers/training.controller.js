@@ -57,11 +57,16 @@ module.exports.createWorkout= (req, res) => {
 module.exports.updateWorkout = (req, res) => {
     Training.updateOne({'workouts._id': req.params.id},
         {'$set': {
-            workouts: req.body.workout
+            'workouts.$.name': req.body.workout.name,
+            'workouts.$.duration': req.body.workout.duration,
+            'workouts.$.intensity': req.body.workout.intensity,
+            'workouts.$.difficulty': req.body.workout.difficulty,
+            'workouts.$.frequency': req.body.workout.frequency
         }})
         .then(updatedWorkout => res.json(updatedWorkout))
         .catch(err => res.json(err))
 }
+
 
 module.exports.deleteWorkout = (req, res) => {
     Training.findByIdAndUpdate(

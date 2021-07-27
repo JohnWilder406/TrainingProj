@@ -81,6 +81,21 @@ const Main = () => {
         setNewWorkout(newWorkout)
     }
 
+    const workoutMissed = (e) => {
+        e.preventDefault();
+        let newDate = addDays(workout.startdate, workout.frequency)
+        let newWorkout = {...workout};
+        if(workout.number === 1) {
+            newWorkout.complete = true
+            newWorkout.number = workout.number
+            newDate = addDays(workout.startdate, 1000)
+        } else {
+            newWorkout.number = workout.number
+            newDate = addDays(workout.startdate, workout.frequency)
+        }
+        newWorkout.startdate = newDate
+        setNewWorkout(newWorkout)
+    }
     //updates workout object in database and repopulates the page with current data
     useEffect(() => {
         axios.put('http://localhost:8000/api/users/' + id + '/complete/' + workout._id, newWorkout)
@@ -157,6 +172,7 @@ const Main = () => {
                                     </Col>
                                     </Form.Group>
                                 <Button className="submit_btn" type="submit">Workout Complete</Button>
+                                <Button style={{marginLeft: "5px"}}className="submit_btn" onClick={(e) => workoutMissed(e)}>Missed Workout</Button>
                             </Form>
                         </div>
                         <div className="panel-footer">
