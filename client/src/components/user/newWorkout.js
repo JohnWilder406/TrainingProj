@@ -84,11 +84,10 @@ const NewWorkout = (props) => {
     
     return (
         <Container className="mainContainer">
-            <h1>New Workout (user)</h1>
             <Navigation />
             <Card border="dark" className="text-center">
                 <Card.Body className="bodys">
-                    <Form>
+                    <Form className="bodys">
                         <Row className="mb-3">
                             <Form.Group as={Col} className="col-4">
                                 <Form.Control 
@@ -120,56 +119,58 @@ const NewWorkout = (props) => {
             <div>
                 <Navbar className="search">
                 <Nav>
-                <Navbar.Brand style={{marginRight: "280px", marginLeft: "10px", color: "#D5E5EE"}}>Search Workouts</Navbar.Brand>
+                <Navbar.Brand style={{marginRight: "850px", marginLeft: "10px", color: "#D5E5EE"}}>Search Workouts</Navbar.Brand>
                 <Search searchQuery={searchQuery} onChange={updateInput} /> 
                 </Nav>
                 </Navbar>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Workout</th>
-                            <th>Duration(mins)</th>
-                            <th>Intensity</th>
-                            <th>Difficulty</th>
-                            <th>Freq/Week</th>
-                            <th>Add</th>
-                        </tr>
-                    </thead>
-                    {/* Currently this is pulling all plans from db. So if there is more than one it would likely populate with other works */}
+                <Container className="bodys" style={{padding: "2%"}}>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Workout</th>
+                                <th>Duration(mins)</th>
+                                <th>Intensity</th>
+                                <th>Difficulty</th>
+                                <th>Freq/Week</th>
+                                <th>Add</th>
+                            </tr>
+                        </thead>
+                        {/* Currently this is pulling all plans from db. So if there is more than one it would likely populate with other works */}
 
-                    {
-                        training.map((plan, index) => {
-                            return (
-                                <tbody key={index}>
-                                    {
-                                        plan.workouts.map((workouts, i) => {
-                                            return (
-                                                <tr key={i}>
-                                                    <td>{workouts.name}</td>
-                                                    <td>{workouts.duration}</td>
-                                                    <td>{workouts.intensity}</td>
-                                                    <td>{workouts.difficulty}</td>
-                                                    <td>{workouts.frequency}</td>
-                                                    <td>
-                                                        <Button style={{backgroundColor: "#00060A"}}onClick={(e) => addNew(
-                                                            workouts.name,
-                                                            workouts.complete, 
-                                                            workouts.duration, 
-                                                            workouts.intensity, 
-                                                            workouts.difficulty, 
-                                                            workouts.frequency
-                                                            )}>Add
-                                                        </Button>
-                                                        </td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            )
-                        })
-                    }
-                </table>
+                        {
+                            training.map((plan, index) => {
+                                return (
+                                    <tbody key={index}>
+                                        {
+                                            plan.workouts.map((workouts, i) => {
+                                                return (
+                                                    <tr key={i}>
+                                                        <td>{workouts.name}</td>
+                                                        <td>{workouts.duration}</td>
+                                                        <td>{workouts.intensity}</td>
+                                                        <td>{workouts.difficulty}</td>
+                                                        <td>{workouts.frequency}</td>
+                                                        <td>
+                                                            <Button style={{backgroundColor: "#00060A"}}onClick={(e) => addNew(
+                                                                workouts.name,
+                                                                workouts.complete, 
+                                                                workouts.duration, 
+                                                                workouts.intensity, 
+                                                                workouts.difficulty, 
+                                                                workouts.frequency
+                                                                )}>Add
+                                                            </Button>
+                                                            </td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
+                                    </tbody>
+                                )
+                            })
+                        }
+                    </table>
+                </Container>
             </div>
         </Container>
     );
