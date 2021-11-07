@@ -36,8 +36,7 @@ const UserList = () => {
         setUserList(filtered)
     }
 
-        //updates favorite status of each order in the database and also refreshes axios upon change so button 
-    //reflects current status of favorite.
+        //updates admin status of each user and also refreshes user list so that button reflects current status of user.
     const adminChange = (user, status) => {
         console.log(user)
         axios.put('http://localhost:8000/api/users/admin/' + user._id, {admin: status})

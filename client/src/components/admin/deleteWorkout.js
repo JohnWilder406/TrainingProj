@@ -5,7 +5,7 @@ import {Button} from 'react-bootstrap';
 const DeleteWorkout = (props) => {
     const {id, workoutid, afterDeleteHandler} = props;
 
-    //delete handler for exporting. Is modular for all pages that need it through delete and mongo label.
+    //delete handler for workout
     const deleteHandler = (e, id, workoutid) => {
         e.preventDefault();
         axios.put('http://localhost:8000/api/plans/' + id + '/delete/' + workoutid)
